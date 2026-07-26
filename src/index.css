@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-aims-navy: #071d49;
+  --color-aims-blue: #123f91;
+  --color-aims-royal: #175bd8;
+  --color-aims-sky: #eaf2ff;
+  --color-aims-gold: #f4bd2a;
+  --color-aims-dark: #06142f;
+  --color-aims-muted: #64748b;
+  --color-aims-surface: #f7f9fc;
+}
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #0f172a;
+  background-color: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background-color: #123f91;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #175bd8;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

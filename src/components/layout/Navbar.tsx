@@ -35,37 +35,58 @@ export function Navbar() {
   return (
     <header className="border-b border-slate-200 bg-white shadow-sm">
       <Container className="max-w-none py-3">
-        <div className="flex items-center justify-between gap-6">
-          <Link
-            to="/"
-            className="flex shrink-0 items-center gap-3 md:gap-4"
-            aria-label="AIMS Campus home"
-            onClick={closeMenus}
-          >
-            <img
-              src={CmpsLogo}
-              alt="AIMS Campus logo"
-              width={120}
-              height={44}
-              className="block shrink-0 object-contain"
-              style={{ height: logoHeight, width: 'auto', maxWidth: 'none' }}
-            />
+       <div className="flex items-center justify-between gap-6">
+  <div className="flex shrink-0 items-center gap-3 md:gap-4">
+    {/* AIMS Logo */}
+    <Link
+      to="/"
+      aria-label="AIMS Campus home"
+      onClick={closeMenus}
+      className="flex shrink-0 items-center"
+    >
+      <img
+        src={CmpsLogo}
+        alt="AIMS Campus logo"
+        width={120}
+        height={44}
+        className="block shrink-0 object-contain"
+        style={{
+          height: logoHeight,
+          width: 'auto',
+          maxWidth: 'none',
+        }}
+      />
+    </Link>
 
-            <span
-              className="w-px shrink-0 bg-slate-200"
-              style={{ height: dividerHeight }}
-              aria-hidden="true"
-            />
+    {/* Divider */}
+    <span
+      className="w-px shrink-0 bg-slate-200"
+      style={{ height: dividerHeight }}
+      aria-hidden="true"
+    />
 
-            <img
-              src={UelLogo}
-              alt="University of East London logo"
-              width={168}
-              height={44}
-              className="block shrink-0 object-contain"
-              style={{ height: logoHeight, width: 'auto', maxWidth: 'none' }}
-            />
-          </Link>
+    {/* University of East London Logo */}
+    <a
+      href="https://www.uel.ac.uk/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Visit University of East London website"
+      className="flex shrink-0 items-center transition-opacity hover:opacity-80"
+    >
+      <img
+        src={UelLogo}
+        alt="University of East London logo"
+        width={168}
+        height={44}
+        className="block shrink-0 object-contain"
+        style={{
+          height: logoHeight,
+          width: 'auto',
+          maxWidth: 'none',
+        }}
+      />
+    </a>
+  </div>
 
           <nav aria-label="Main navigation" className="hidden lg:flex lg:flex-1 lg:justify-end">
             <ul className="flex items-center gap-8 text-base font-semibold text-slate-600">

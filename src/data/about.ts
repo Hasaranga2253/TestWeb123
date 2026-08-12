@@ -33,7 +33,7 @@ export const aboutPageContent: AboutPageContent = {
     eyebrow: 'About AIMS Campus',
     title: 'Transforming lives through education',
     description:
-      'AIMS Campus is an established higher education institution with 38 years of academic excellence, providing recognised local and international education pathways.',
+      'AIMS Campus is an established higher education institution with 39 years of academic excellence, providing recognised local and international education pathways.',
     // TODO: replace with src/assets/images/about/hero-graduation.webp
     image: aboutFallbackImage,
     imageAlt: '',
@@ -61,7 +61,7 @@ export const aboutPageContent: AboutPageContent = {
     // TODO: replace with src/assets/images/about/about-graduate.webp
     image: aboutFallbackImage,
     imageAlt: 'An AIMS Campus graduate in formal academic attire during a graduation celebration.',
-    imageBadge: '38 Years of excellence',
+    imageBadge: '39 Years of excellence',
   },
   pillars: {
     eyebrow: 'Five pillars',
@@ -140,7 +140,7 @@ export const aboutStats: AboutStat[] = [
     label: 'Established',
   },
   {
-    value: '38',
+    value: '39',
     label: 'Years of excellence',
   },
   {
@@ -207,7 +207,7 @@ export const historyMilestones: HistoryMilestone[] = [
   },
   {
     year: 'Today',
-    title: '38 years of excellence',
+    title: '39 years of excellence',
     description:
       'AIMS Campus continues to develop learning opportunities that respond to changing academic, professional and industry needs.',
   },

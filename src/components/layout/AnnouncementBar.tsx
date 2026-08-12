@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail, Phone, Search } from 'lucide-react';
+import { ArrowUpRight, Mail, Phone } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -26,9 +26,9 @@ const socialLinks = [
 export function AnnouncementBar() {
   return (
     <div className="bg-aims-navy text-white">
-      <Container className="py-2.5">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-3">
+      <Container className="!mx-0 !max-w-none py-2.5">
+        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+          <div className="flex items-center gap-3 lg:justify-self-start">
             {socialLinks.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
@@ -49,7 +49,7 @@ export function AnnouncementBar() {
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-blue-100">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-blue-100 lg:justify-self-center">
             <a
               href="mailto:info@aimscampus.lk"
               className="inline-flex items-center gap-2 transition hover:text-white"
@@ -66,20 +66,7 @@ export function AnnouncementBar() {
             </a>
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <label className="relative">
-              <Search
-                aria-hidden="true"
-                size={16}
-                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-aims-gold"
-              />
-              <input
-                type="search"
-                aria-label="Search"
-                placeholder="Search"
-                className="h-10 w-full rounded-full border border-white/10 bg-white/10 pl-10 pr-4 text-sm text-white placeholder:text-white/65 outline-none transition focus:border-aims-gold sm:w-52"
-              />
-            </label>
+          <div className="flex lg:justify-self-end">
             <Link
               to="/contact"
               className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-aims-gold px-5 text-sm font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-lg"

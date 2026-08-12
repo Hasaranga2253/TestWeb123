@@ -1,42 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ChevronDown, Menu, X } from 'lucide-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { Container } from '../common/Container';
 import CmpsLogo from '../../assets/logos/CmpsLogo.png';
+import { programmeNavLinks } from '../../data/programmes';
 
 const navigation = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Programmes', to: '/programmes' },
   { label: 'Contact', to: '/contact' },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isProgrammesOpen, setIsProgrammesOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isProgrammesRoute = pathname.startsWith('/programmes');
+
+  useEffect(() => {
+    setIsOpen(false);
+    setIsProgrammesOpen(false);
+  }, [pathname]);
+
+  const closeMenus = () => {
+    setIsOpen(false);
+    setIsProgrammesOpen(false);
+  };
 
   return (
     <header className="border-b border-slate-200 bg-white shadow-sm">
-      <Container className="py-3">
-        <div className="flex items-center justify-between gap-4">
+      <Container className="max-w-none py-3">
+        <div className="flex items-center justify-between gap-6">
           <Link
             to="/"
-            className="flex items-center"
+            className="flex shrink-0 items-center"
             aria-label="AIMS Campus home"
-            onClick={() => setIsOpen(false)}
+            onClick={closeMenus}
           >
             <img
               src={CmpsLogo}
               alt="AIMS Campus logo"
-              width={140}
-              height={36}
-              className="block h-9 w-[8.75rem] object-contain object-left"
+              width={120}
+              height={30}
+              className="block h-8 w-[7.5rem] object-contain object-left"
             />
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden lg:block">
-            <ul className="flex items-center gap-8 text-[15px] font-semibold text-slate-600">
+          <nav aria-label="Main navigation" className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <ul className="flex items-center gap-8 text-base font-semibold text-slate-600">
               {navigation.map((item) => (
                 <li key={item.to}>
                   <NavLink
@@ -48,13 +61,61 @@ export function Navbar() {
                     }
                   >
                     {item.label}
-
-                    {item.label === 'Programmes' ? (
-                      <ChevronDown size={14} aria-hidden="true" />
-                    ) : null}
                   </NavLink>
                 </li>
               ))}
+
+              <li className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsProgrammesOpen((value) => !value)}
+                  onMouseEnter={() => setIsProgrammesOpen(true)}
+                  className={`inline-flex items-center gap-1 transition hover:text-aims-blue ${
+                    isProgrammesRoute ? 'text-aims-blue' : ''
+                  }`}
+                  aria-expanded={isProgrammesOpen}
+                  aria-haspopup="menu"
+                >
+                  Programmes
+                  <ChevronDown
+                    size={14}
+                    aria-hidden="true"
+                    className={`transition ${isProgrammesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                {isProgrammesOpen ? (
+                  <div
+                    className="absolute right-0 top-full z-30 mt-3 w-80 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl"
+                    onMouseLeave={() => setIsProgrammesOpen(false)}
+                    onMouseEnter={() => setIsProgrammesOpen(true)}
+                  >
+                    <Link
+                      to="/programmes"
+                      onClick={closeMenus}
+                      className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-aims-blue"
+                    >
+                      Programme overview
+                      <ChevronDown size={14} aria-hidden="true" className="rotate-[-90deg]" />
+                    </Link>
+                    <div className="mt-2 space-y-2">
+                      {programmeNavLinks.map((item) => (
+                        <Link
+                          key={item.slug}
+                          to={item.to}
+                          onClick={closeMenus}
+                          className="flex items-start justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-aims-blue"
+                        >
+                          <span>{item.label}</span>
+                          <span className="ml-4 text-xs uppercase tracking-[0.18em] text-slate-400">
+                            Open
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </li>
             </ul>
           </nav>
 
@@ -63,16 +124,10 @@ export function Navbar() {
             onClick={() => setIsOpen((value) => !value)}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
-            aria-label={
-              isOpen ? 'Close navigation menu' : 'Open navigation menu'
-            }
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-aims-blue hover:text-aims-blue lg:hidden"
           >
-            {isOpen ? (
-              <X size={20} aria-hidden="true" />
-            ) : (
-              <Menu size={20} aria-hidden="true" />
-            )}
+            {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
 
@@ -87,7 +142,7 @@ export function Navbar() {
                 <li key={item.to}>
                   <NavLink
                     to={item.to}
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeMenus}
                     className={({ isActive }) =>
                       `flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition ${
                         isActive
@@ -97,13 +152,52 @@ export function Navbar() {
                     }
                   >
                     <span>{item.label}</span>
-
-                    {item.label === 'Programmes' ? (
-                      <ChevronDown size={14} aria-hidden="true" />
-                    ) : null}
                   </NavLink>
                 </li>
               ))}
+
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setIsProgrammesOpen((value) => !value)}
+                  className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                    isProgrammesRoute
+                      ? 'bg-white text-aims-blue shadow-sm'
+                      : 'text-slate-600 hover:bg-white hover:text-aims-blue'
+                  }`}
+                  aria-expanded={isProgrammesOpen}
+                  aria-controls="mobile-programmes-menu"
+                >
+                  <span>Programmes</span>
+                  <ChevronDown
+                    size={14}
+                    aria-hidden="true"
+                    className={`transition ${isProgrammesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                {isProgrammesOpen ? (
+                  <div id="mobile-programmes-menu" className="mt-2 space-y-2 pl-3">
+                    <Link
+                      to="/programmes"
+                      onClick={closeMenus}
+                      className="block rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-600 shadow-sm transition hover:text-aims-blue"
+                    >
+                      Programme overview
+                    </Link>
+                    {programmeNavLinks.map((item) => (
+                      <Link
+                        key={item.slug}
+                        to={item.to}
+                        onClick={closeMenus}
+                        className="block rounded-xl bg-white px-4 py-3 text-sm font-medium text-slate-600 shadow-sm transition hover:text-aims-blue"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </li>
             </ul>
           </nav>
         ) : null}

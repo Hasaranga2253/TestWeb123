@@ -16,17 +16,14 @@ import {
 } from 'lucide-react';
 import UEL from '../assets/logos/UELlogo.jpeg';
 import nccLogo from '../assets/logos/NCClogo.webp';
-import bachelorsProgrammeImage from '../assets/images/BACHELORS.png';
-import diplomaProgrammeImage from '../assets/images/DIPLOMA.png';
-import doctoralProgrammeImage from '../assets/images/DOCTORAL.png';
-import englishProgrammeImage from '../assets/images/ENGLISH.png';
-import foundationProgrammeImage from '../assets/images/FOUNDATION.png';
 import Hslider1 from '../assets/images/Hslider1.jpeg';
 import Hslider2 from '../assets/images/Hslider2.jpeg';
 import Hslider3 from '../assets/images/Hslider3.jpeg';
-import mastersProgrammeImage from '../assets/images/MASTERS.png';
-import professionalProgrammeImage from '../assets/images/PROFESSIONAL.png';
 import WhyCaims from '../assets/images/WhyCaims.png';
+import AppliedComputing from '../assets/images/AppliedComputing.jpeg';
+import IBM from '../assets/images/IBM.jpeg';
+import foundationProgrammeImage from '../assets/images/FOUNDATION.png';
+import EduStudy from '../assets/images/EduStudy.jpeg';
 
 
 
@@ -157,52 +154,31 @@ type FeaturedProgramme = {
 const featuredProgrammes: FeaturedProgramme[] = [
   {
     tag: 'Foundation route',
-    title: 'Foundation',
-    description: 'Build a strong academic base and move confidently into higher study.',
+    title: '',
+    description: 'Build study, presentation and foundation mathematics skills for progression into higher education.',
     focus: 'Entry pathway',
     image: foundationProgrammeImage,
   },
   {
-    tag: 'Progression route',
-    title: 'Diploma',
-    description: 'Develop practical knowledge with a clear route into further qualifications.',
-    focus: 'Career focused',
-    image: diplomaProgrammeImage,
+    tag: 'Undergraduate route',
+    title: '', 
+    description: 'Build software, web, mobile, cloud and cybersecurity capabilities for modern computing careers.',
+    focus: 'Computing degree',
+    image: AppliedComputing
   },
   {
     tag: 'Undergraduate route',
-    title: "Bachelor's Degrees",
-    description: 'Study toward recognised degree outcomes across key academic areas.',
-    focus: 'Degree study',
-    image: bachelorsProgrammeImage,
+    title: '',
+    description: 'Develop teaching, learning, assessment and curriculum skills for education and training roles.',
+    focus: 'Education degree',
+    image: EduStudy,
   },
   {
-    tag: 'Postgraduate route',
-    title: "Master's Degrees",
-    description: 'Advance your expertise with leadership-oriented postgraduate study.',
-    focus: 'Advanced study',
-    image: mastersProgrammeImage,
-  },
-  {
-    tag: 'Research route',
-    title: 'Doctoral Programmes',
-    description: 'Pursue research-led study for scholarly contribution and professional growth.',
-    focus: 'Research-led',
-    image: doctoralProgrammeImage,
-  },
-  {
-    tag: 'Professional route',
-    title: 'Professional Qualifications',
-    description: 'Strengthen your career with flexible qualifications built for progression.',
-    focus: 'Industry ready',
-    image: professionalProgrammeImage,
-  },
-  {
-    tag: 'Language route',
-    title: 'English Qualifications',
-    description: 'Improve communication and progression readiness through language study.',
-    focus: 'Academic readiness',
-    image: englishProgrammeImage,
+    tag: 'Undergraduate route',
+    title: '',
+    description: 'Strengthen leadership, entrepreneurship, finance and global business knowledge for management careers.',
+    focus: 'Business degree',
+    image: IBM
   },
 ];
 
@@ -735,6 +711,17 @@ export default function HomePage() {
         </div>
       </Section>
 
+            <Section className="bg-white pt-0">
+        <header className="max-w-3xl">
+          <p className="font-semibold uppercase tracking-[0.2em] text-aims-blue">Explore pathways</p>
+          <h2 className="mt-3 text-4xl font-bold text-aims-navy">Explore highlight programmes</h2>
+          <p className="mt-3 text-slate-600">
+            Browse the main pathways and study routes available through AIMS Campus.
+          </p>
+        </header>
+        <ProgrammeShowcase />
+      </Section>
+
       <Section className="bg-white">
         <header className="text-center">
           <p className="font-semibold uppercase tracking-[0.2em] text-aims-blue">What you can study</p>
@@ -764,16 +751,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section className="bg-white pt-0">
-        <header className="max-w-3xl">
-          <p className="font-semibold uppercase tracking-[0.2em] text-aims-blue">Explore pathways</p>
-          <h2 className="mt-3 text-4xl font-bold text-aims-navy">Explore programmes</h2>
-          <p className="mt-3 text-slate-600">
-            Browse the main pathways and study routes available through AIMS Campus.
-          </p>
-        </header>
-        <ProgrammeShowcase />
-      </Section>
+
 
       <Section className="bg-white">
   <header className="mx-auto max-w-2xl text-center">

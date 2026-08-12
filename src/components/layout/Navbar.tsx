@@ -4,7 +4,8 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { Container } from '../common/Container';
-import CmpsLogo from '../../assets/logos/CmpsLogo.png';
+import CmpsLogo from '../../assets/logos/CmpsLogo-cropped.png';
+import UelLogo from '../../assets/logos/University of East London Crest Logo-cropped.png';
 import { programmeNavLinks } from '../../data/programmes';
 
 const navigation = [
@@ -18,6 +19,8 @@ export function Navbar() {
   const [isProgrammesOpen, setIsProgrammesOpen] = useState(false);
   const { pathname } = useLocation();
   const isProgrammesRoute = pathname.startsWith('/programmes');
+  const logoHeight = 'clamp(2.25rem, 4vw, 2.75rem)';
+  const dividerHeight = 'clamp(2rem, 3.5vw, 2.5rem)';
 
   useEffect(() => {
     setIsOpen(false);
@@ -35,7 +38,7 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-6">
           <Link
             to="/"
-            className="flex shrink-0 items-center"
+            className="flex shrink-0 items-center gap-3 md:gap-4"
             aria-label="AIMS Campus home"
             onClick={closeMenus}
           >
@@ -43,8 +46,24 @@ export function Navbar() {
               src={CmpsLogo}
               alt="AIMS Campus logo"
               width={120}
-              height={30}
-              className="block h-8 w-[7.5rem] object-contain object-left"
+              height={44}
+              className="block shrink-0 object-contain"
+              style={{ height: logoHeight, width: 'auto', maxWidth: 'none' }}
+            />
+
+            <span
+              className="w-px shrink-0 bg-slate-200"
+              style={{ height: dividerHeight }}
+              aria-hidden="true"
+            />
+
+            <img
+              src={UelLogo}
+              alt="University of East London logo"
+              width={168}
+              height={44}
+              className="block shrink-0 object-contain"
+              style={{ height: logoHeight, width: 'auto', maxWidth: 'none' }}
             />
           </Link>
 

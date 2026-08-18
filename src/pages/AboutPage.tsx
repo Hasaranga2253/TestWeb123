@@ -231,6 +231,93 @@ function AcademicLeadershipCarousel({
   );
 }
 
+function FloatingPillars({
+  pillars,
+}: {
+  pillars: typeof excellencePillars;
+}) {
+  const accents = [
+    { tile: 'from-sky-400/25 to-blue-500/10', icon: 'text-sky-600' },
+    { tile: 'from-violet-400/25 to-purple-500/10', icon: 'text-violet-600' },
+    { tile: 'from-emerald-400/25 to-teal-500/10', icon: 'text-emerald-600' },
+    { tile: 'from-amber-400/25 to-orange-500/10', icon: 'text-amber-600' },
+    { tile: 'from-rose-400/25 to-pink-500/10', icon: 'text-rose-600' },
+  ];
+
+  return (
+    <div className="mt-20 flex flex-wrap items-start justify-center gap-x-7 gap-y-16 sm:gap-x-9">
+      {pillars.map(({ title, description, icon: Icon }, index) => {
+        const accent = accents[index % accents.length];
+        const duration = 3.4 + index * 0.35;
+        const delay = index * 0.25;
+        const isOffset = index % 2 === 1;
+
+        return (
+          <motion.div
+            key={title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
+            className="w-full max-w-[15rem]"
+            style={{ marginTop: isOffset ? '2.75rem' : 0 }}
+          >
+            <motion.article
+              animate={{
+                y: [0, -14, 0],
+                rotate: [0, isOffset ? -1.5 : 1.5, 0],
+              }}
+              transition={{
+                duration,
+                delay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              whileHover={{ scale: 1.05 }}
+              className="group relative flex flex-col items-center rounded-[2rem] border border-slate-100 bg-white p-7 text-center shadow-[0_20px_45px_rgba(7,29,73,0.09)] transition-shadow duration-300 hover:border-aims-blue/15 hover:shadow-[0_30px_60px_rgba(7,29,73,0.16)]"
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-3 right-6 select-none font-mono text-xs text-slate-300"
+              >
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              <div
+                className={`flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br ${accent.tile} shadow-inner ring-1 ring-white/70`}
+              >
+                <Icon aria-hidden="true" size={26} className={accent.icon} />
+              </div>
+
+              <h3 className="mt-5 text-lg font-bold leading-snug text-aims-navy">
+                {title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                {description}
+              </p>
+            </motion.article>
+
+            <motion.div
+              aria-hidden="true"
+              animate={{
+                scaleX: [1, 0.55, 1],
+                opacity: [0.4, 0.15, 0.4],
+              }}
+              transition={{
+                duration,
+                delay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="mx-auto mt-4 h-3 w-2/3 rounded-full bg-slate-900/10 blur-md"
+            />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function AboutPage() {
   return (
     <div className="bg-white text-slate-800">
@@ -494,22 +581,7 @@ export function AboutPage() {
       <AnimatedSection className="py-18 sm:py-20 lg:py-24">
         <Container>
           <SectionIntroBlock content={aboutPageContent.pillars} centered />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
-            {excellencePillars.map(({ title, description, icon: Icon }) => (
-              <motion.article
-                key={title}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.75rem] border border-slate-100 bg-white p-7 shadow-sm hover:border-aims-blue/15 hover:shadow-xl"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
-                  <Icon aria-hidden="true" size={28} />
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-aims-navy">{title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-600">{description}</p>
-              </motion.article>
-            ))}
-          </div>
+          <FloatingPillars pillars={excellencePillars} />
         </Container>
       </AnimatedSection>
 

@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 
 import { Container } from '../components/common/Container';
 import aboutHeroVideo from '../assets/videos/Sequence 02.mp4';
+import historyVideo from '../assets/videos/AMIS_Campus_Video_v2.mp4';
 import {
   academicLeadershipProfiles,
   aboutPageContent,
   aboutStats,
   boardGovernanceMembers,
   excellencePillars,
-  historyMilestones,
 } from '../data/about';
 import type { AcademicLeaderProfile, SectionIntro } from '../types/about';
 
@@ -274,14 +274,8 @@ function FloatingPillars({
                 ease: 'easeInOut',
               }}
               whileHover={{ scale: 1.05 }}
-              className="group relative flex flex-col items-center rounded-[2rem] border border-slate-100 bg-white p-7 text-center shadow-[0_20px_45px_rgba(7,29,73,0.09)] transition-shadow duration-300 hover:border-aims-blue/15 hover:shadow-[0_30px_60px_rgba(7,29,73,0.16)]"
+              className="group relative flex flex-col items-center rounded-[2rem] border-2 border-aims-blue/20 bg-white p-7 text-center shadow-[0_20px_45px_rgba(7,29,73,0.09)] transition-all duration-300 hover:border-aims-blue/45 hover:shadow-[0_30px_60px_rgba(7,29,73,0.16)]"
             >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -top-3 right-6 select-none font-mono text-xs text-slate-300"
-              >
-                {String(index + 1).padStart(2, '0')}
-              </span>
 
               <div
                 className={`flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br ${accent.tile} shadow-inner ring-1 ring-white/70`}
@@ -371,7 +365,7 @@ export function AboutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.12 * index, duration: 0.45, ease: 'easeOut' }}
-                className="rounded-[1.75rem] border border-white/15 bg-white/10 p-5 shadow-lg backdrop-blur-sm sm:p-6"
+                className="rounded-[1.75rem] border border-white/15 bg-[#061d49]/35 p-5 shadow-lg backdrop-blur-sm sm:p-6"
               >
                 <dt className="text-sm uppercase tracking-[0.16em] text-blue-100">
                   {stat.label}
@@ -585,58 +579,51 @@ export function AboutPage() {
         </Container>
       </AnimatedSection>
 
-      <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="relative overflow-hidden rounded-[2rem]">
-              <img
-                src={aboutPageContent.history.image}
-                alt={aboutPageContent.history.imageAlt}
-                loading="lazy"
-                className="h-full min-h-80 w-full object-cover"
-              />
-              <div
-                className="absolute inset-0 bg-linear-to-t from-[#04122d]/75 via-[#071d49]/20 to-transparent"
-                aria-hidden="true"
-              />
-            </div>
+<section className="bg-white">
+  {/* HISTORY TEXT - ABOVE THE VIDEO */}
+  <div className="relative py-14 sm:py-16 lg:py-20">
+    <Container>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{
+          duration: 0.6,
+          ease: 'easeOut',
+        }}
+        className="mx-auto max-w-5xl text-center"
+      >
+        <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
+          {aboutPageContent.history.eyebrow}
+        </p>
 
-            <div>
-              <div className="max-w-3xl">
-                <p className="font-semibold uppercase tracking-[0.2em] text-aims-gold">
-                  {aboutPageContent.history.eyebrow}
-                </p>
-                <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-                  {aboutPageContent.history.title}
-                </h2>
-                <p className="mt-5 text-base leading-8 text-blue-100 sm:text-lg">
-                  {aboutPageContent.history.description}
-                </p>
-              </div>
+        <h2 className="mx-auto mt-5 max-w-4xl text-4xl font-bold leading-[1.08] text-aims-navy sm:text-5xl lg:text-6xl">
+          {aboutPageContent.history.title}
+        </h2>
 
-              <div className="mt-10 grid gap-5 sm:grid-cols-2">
-                {historyMilestones.map((milestone) => (
-                  <article
-                    key={`${milestone.year}-${milestone.title}`}
-                    className="rounded-[1.75rem] border border-white/10 bg-white/6 p-6 shadow-lg backdrop-blur-sm"
-                  >
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-aims-gold">
-                      {milestone.year}
-                    </p>
-                    <h3 className="mt-4 text-xl font-bold text-white">
-                      {milestone.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-7 text-blue-100">
-                      {milestone.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Container>
-      </AnimatedSection>
+        <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg lg:text-xl">
+          {aboutPageContent.history.description}
+        </p>
+      </motion.div>
+    </Container>
+  </div>
 
+  {/* VIDEO - BELOW THE TEXT */}
+  <div className="relative h-[420px] overflow-hidden sm:h-[520px] lg:h-[620px]">
+    <video
+      aria-hidden="true"
+      autoPlay
+      loop
+      muted
+      playsInline
+      disablePictureInPicture
+      controls={false}
+      className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+    >
+      <source src={historyVideo} type="video/mp4" />
+    </video>
+  </div>
+</section>
 
 
 

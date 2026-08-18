@@ -8,7 +8,7 @@ import {
 
 import aboutFallbackImage from '../assets/images/d9137cae-bb2f-4b7a-b543-5f9b612e3ac9.png';
 import chairmanImage from '../assets/images/chairman.jpeg';
-
+import hh from '../assets/images/Waidyasekara.png';
 import type {
   AcademicLeaderProfile,
   AboutPageContent,
@@ -67,7 +67,7 @@ export const aboutPageContent: AboutPageContent = {
   },
 
   pillars: {
-    eyebrow: 'Five pillars',
+    eyebrow: '',
     title: 'Five pillars of excellence',
     description:
       'These principles guide teaching quality, academic development, partnerships, student experience and institutional leadership.',
@@ -136,7 +136,7 @@ export const aboutStats: AboutStat[] = [
 export const boardGovernanceMembers: BoardGovernanceMember[] = [
   {
     name: 'Dr. Kithsiri Manchanayakke',
-    image: chairmanImage,
+    image: hh,
     imageAlt: 'Dr. Kithsiri Manchanayakke.',
   },
 

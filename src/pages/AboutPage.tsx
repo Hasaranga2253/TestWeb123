@@ -6,19 +6,14 @@ import { ArrowLeft, ArrowRight, Award, CheckCircle2, Quote } from 'lucide-react'
 import { Link } from 'react-router-dom';
 
 import { Container } from '../components/common/Container';
+import aboutHeroVideo from '../assets/videos/Sequence 02.mp4';
 import {
   academicLeadershipProfiles,
   aboutPageContent,
   aboutStats,
-  academicPartners,
-  academicPathways,
-  campusLocations,
+  boardGovernanceMembers,
   excellencePillars,
   historyMilestones,
-  institutionalHighlights,
-  lifeAtAimsItems,
-  researchGallery,
-  studentLifeGallery,
 } from '../data/about';
 import type { AcademicLeaderProfile, SectionIntro } from '../types/about';
 
@@ -239,23 +234,32 @@ function AcademicLeadershipCarousel({
 export function AboutPage() {
   return (
     <div className="bg-white text-slate-800">
-      <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden bg-aims-navy text-white">
-        <img
-          src={aboutPageContent.hero.image}
-          alt={aboutPageContent.hero.imageAlt}
-          aria-hidden={aboutPageContent.hero.imageAlt === '' ? 'true' : undefined}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div
-          className="absolute inset-0 bg-linear-to-r from-[#04122d]/95 via-[#071d49]/88 to-[#123f91]/76"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#04122d]/80 to-transparent"
-          aria-hidden="true"
-        />
+      <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden text-white">
+        <video
+    aria-hidden="true"
+    autoPlay
+    loop
+    muted
+    playsInline
+    disablePictureInPicture
+    controls={false}
+    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+  >
+          <source src={aboutHeroVideo} type="video/mp4" />
+        </video>
 
-        <Container className="relative z-10 py-20 sm:py-24 lg:py-28">
+  {/* LIGHT BLUE / NAVY MASK */}
+  <div
+    className="pointer-events-none absolute inset-0 bg-[#06245a]/40"
+    aria-hidden="true"
+  />
+
+  {/* Slightly stronger mask behind left-side text */}
+  <div
+    className="pointer-events-none absolute inset-0 bg-linear-to-r from-[#041a43]/35 via-[#0b3d82]/15 to-transparent"
+    aria-hidden="true"
+  />
+         <Container className="relative z-10 py-20 sm:py-24 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -332,41 +336,160 @@ export function AboutPage() {
         </Container>
       </AnimatedSection>
 
-      <AnimatedSection className="bg-aims-surface py-18 sm:py-20 lg:py-24">
+      <AnimatedSection className="py-18 sm:py-20 lg:py-24">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
-            <div className="relative overflow-hidden rounded-[2rem] shadow-xl">
-              <img
-                src={aboutPageContent.introduction.image}
-                alt={aboutPageContent.introduction.imageAlt}
-                loading="lazy"
-                className="h-full min-h-80 w-full object-cover"
-              />
-              <div
-                className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#04122d]/70 to-transparent"
+          <div className="relative isolate grid overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-2xl lg:grid-cols-[1.1fr_0.9fr]">
+            {/* message */}
+            <div className="relative px-7 py-10 sm:px-10 sm:py-12 lg:p-14">
+              <Quote
                 aria-hidden="true"
+                size={120}
+                strokeWidth={1}
+                className="pointer-events-none absolute -left-2 -top-4 text-aims-sky"
               />
-              <div className="absolute left-5 top-5 rounded-full bg-white/92 px-5 py-3 text-sm font-semibold text-aims-navy shadow-lg">
-                {aboutPageContent.introduction.imageBadge}
+
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 rounded-full bg-aims-sky px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-aims-blue">
+                  {aboutPageContent.chairmanMessage.role} · {aboutPageContent.chairmanMessage.campus}
+                </span>
+
+                <p className="mt-6 text-xl font-semibold leading-relaxed text-aims-navy sm:text-2xl">
+                  {aboutPageContent.chairmanMessage.paragraphs[0]}
+                </p>
+
+                <div className="mt-7 space-y-5">
+                  {aboutPageContent.chairmanMessage.paragraphs.slice(1).map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="text-base leading-7 text-slate-600 sm:text-[1.05rem]"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="mt-9 flex items-center gap-4 border-t border-slate-100 pt-7">
+                  <span className="h-px w-10 shrink-0 bg-aims-gold" aria-hidden="true" />
+                  <div>
+                    <p className="font-serif text-2xl italic text-aims-navy">
+                      {aboutPageContent.chairmanMessage.name}
+                    </p>
+                    <p className="mt-1 text-sm uppercase tracking-[0.16em] text-slate-400">
+                      {aboutPageContent.chairmanMessage.role} · {aboutPageContent.chairmanMessage.campus}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div>
-              <SectionIntroBlock content={aboutPageContent.introduction} />
-              <div className="mt-8 space-y-5">
-                {aboutPageContent.introduction.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    className="text-base leading-8 text-slate-600 sm:text-lg"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
+            {/* portrait */}
+            <div className="relative flex flex-col overflow-hidden bg-aims-navy px-7 pb-0 pt-10 text-white sm:px-10 lg:px-12">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:22px_22px]"
+                aria-hidden="true"
+              />
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full border border-white/10"
+                aria-hidden="true"
+              />
+
+              <div className="relative z-10 max-w-xs">
+                <p className="text-base font-bold uppercase tracking-[0.24em] text-aims-gold sm:text-lg">
+                  {aboutPageContent.chairmanMessage.title}
+                </p>
+                <p className="mt-4 text-base font-medium leading-7 text-blue-100 sm:text-lg sm:leading-8">
+                  A note to every student and graduate of {aboutPageContent.chairmanMessage.campus}.
+                </p>
+              </div>
+
+              <div className="relative z-10 mt-8 flex min-h-[32rem] flex-1 items-end justify-end">
+                <img
+                  src={aboutPageContent.chairmanMessage.image}
+                  alt={aboutPageContent.chairmanMessage.imageAlt}
+                  loading="lazy"
+                  className="h-[34rem] w-auto max-w-none object-contain object-bottom drop-shadow-2xl sm:h-[40rem] lg:-mr-14 lg:h-[46rem] xl:-mr-20 xl:h-[50rem]"
+                />
+
               </div>
             </div>
           </div>
         </Container>
       </AnimatedSection>
+
+       <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
+        <Container>
+          <div className="max-w-2xl">
+            <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
+              Governance
+            </p>
+
+            <div className="relative mt-5 inline-block overflow-hidden rounded-2xl bg-black px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:px-8 sm:py-6">
+              <span className="absolute inset-y-0 left-0 w-1.5 bg-aims-gold" aria-hidden="true" />
+              <h2 className="pl-3 text-3xl font-bold uppercase leading-tight tracking-[0.06em] sm:text-4xl lg:text-5xl">
+                Board of Governance
+                <span className="block text-aims-gold">of AIMS Campus</span>
+              </h2>
+            </div>
+
+            <p className="mt-6 text-base leading-7 text-blue-100 sm:text-lg">
+              The senior leadership guiding strategy, academic oversight and institutional direction at AIMS Campus.
+            </p>
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-14 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10">
+            {boardGovernanceMembers.map((member) => (
+              <motion.figure
+                key={member.name}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="group mx-auto w-full max-w-[11rem] text-center"
+              >
+                <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full border-4 border-white/10 shadow-xl transition duration-300 group-hover:border-aims-gold/70 sm:h-32 sm:w-32">
+                  <img
+                    src={member.image}
+                    alt={member.imageAlt}
+                    loading="lazy"
+                    className="h-full w-full scale-[1.7] object-cover object-top transition duration-300 group-hover:scale-[1.8]"
+                  />
+                  <div
+                    className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/15"
+                    aria-hidden="true"
+                  />
+                </div>
+
+                <figcaption className="mt-5">
+                  <p className="text-base font-semibold leading-6 tracking-[0.04em] text-white">
+                    {member.name}
+                  </p>
+                  <span className="mt-2 inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-aims-gold/80">
+                    Board of Governance
+                  </span>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
+        </Container>
+      </AnimatedSection>
+
+      
+      <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
+        <Container>
+          <div className="max-w-3xl">
+            <p className="font-semibold uppercase tracking-[0.2em] text-aims-gold">
+              {aboutPageContent.academicLeadership.eyebrow}
+            </p>
+            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+              {aboutPageContent.academicLeadership.title}
+            </h2>
+            <p className="mt-5 text-base leading-8 text-blue-100 sm:text-lg">
+              {aboutPageContent.academicLeadership.description}
+            </p>
+          </div>
+
+          <AcademicLeadershipCarousel profiles={academicLeadershipProfiles} />
+        </Container>
+      </AnimatedSection>
+
 
       <AnimatedSection className="py-18 sm:py-20 lg:py-24">
         <Container>
@@ -442,228 +565,8 @@ export function AboutPage() {
         </Container>
       </AnimatedSection>
 
-      <AnimatedSection className="py-18 sm:py-20 lg:py-24">
-        <Container>
-          <SectionIntroBlock content={aboutPageContent.partners} centered />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-            {academicPartners.map((partner) => (
-              <motion.article
-                key={partner.name}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg"
-              >
-                <div className="flex h-24 items-center justify-center rounded-2xl bg-slate-50 p-4">
-                  <img
-                    src={partner.logo}
-                    alt={partner.logoAlt}
-                    loading="lazy"
-                    className="max-h-full w-full object-contain"
-                  />
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-aims-navy">{partner.name}</h3>
-                <p className="mt-2 font-medium text-aims-blue">{partner.country}</p>
-                <p className="mt-3 text-base leading-7 text-slate-600">
-                  {partner.relationship}
-                </p>
-              </motion.article>
-            ))}
-          </div>
-        </Container>
-      </AnimatedSection>
 
-      <AnimatedSection className="bg-aims-sky py-18 sm:py-20 lg:py-24">
-        <Container>
-          <SectionIntroBlock content={aboutPageContent.pathways} />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-            {academicPathways.map((pathway) => (
-              <motion.article
-                key={pathway.title}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.75rem] bg-white p-7 shadow-sm hover:shadow-lg"
-              >
-                <h3 className="text-xl font-bold text-aims-navy">{pathway.title}</h3>
-                <p className="mt-4 text-base leading-7 text-slate-600">
-                  {pathway.description}
-                </p>
-              </motion.article>
-            ))}
-          </div>
-        </Container>
-      </AnimatedSection>
 
-      <AnimatedSection className="py-18 sm:py-20 lg:py-24">
-        <Container>
-          <SectionIntroBlock content={aboutPageContent.campuses} />
-          <div className="mt-12 grid gap-8 xl:grid-cols-3">
-            {campusLocations.map((campus) => (
-              <motion.article
-                key={campus.name}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm hover:shadow-lg"
-              >
-                <img
-                  src={campus.image}
-                  alt={campus.imageAlt}
-                  loading="lazy"
-                  className="h-56 w-full object-cover"
-                />
-                <div className="p-7">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-aims-blue">
-                    {campus.type}
-                  </p>
-                  <h3 className="mt-3 text-2xl font-bold text-aims-navy">{campus.name}</h3>
-                  <address className="mt-5 not-italic text-base leading-7 text-slate-600">
-                    {campus.address.map((line) => (
-                      <span key={`${campus.name}-${line}`} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
-                  <p className="mt-5 text-base leading-7 text-slate-600">
-                    {campus.description}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </Container>
-      </AnimatedSection>
-
-      <AnimatedSection className="bg-aims-surface py-18 sm:py-20 lg:py-24">
-        <Container>
-          <SectionIntroBlock content={aboutPageContent.lifeAtAims} centered />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {lifeAtAimsItems.map(({ title, description, icon: Icon }) => (
-              <motion.article
-                key={title}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.75rem] bg-white p-7 shadow-sm hover:shadow-lg"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
-                  <Icon aria-hidden="true" size={28} />
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-aims-navy">{title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-600">{description}</p>
-              </motion.article>
-            ))}
-          </div>
-
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:grid-rows-2">
-            {studentLifeGallery.map((image, index) => {
-              const layoutClassName =
-                index === 0
-                  ? 'lg:col-span-5 lg:row-span-2'
-                  : index === 1
-                    ? 'lg:col-span-7'
-                    : index === 2
-                      ? 'lg:col-span-4'
-                      : 'lg:col-span-3';
-
-              return (
-                <motion.figure
-                  key={image.title}
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ duration: 0.2 }}
-                  className={`overflow-hidden rounded-[1.75rem] shadow-md ${layoutClassName}`}
-                >
-                  <img
-                    src={image.image}
-                    alt={image.alt}
-                    loading="lazy"
-                    className={`w-full object-cover ${
-                      index === 0 ? 'h-80 sm:h-96 lg:h-full' : 'h-60 sm:h-72 lg:h-full'
-                    }`}
-                  />
-                </motion.figure>
-              );
-            })}
-          </div>
-        </Container>
-      </AnimatedSection>
-
-      <AnimatedSection className="py-18 sm:py-20 lg:py-24">
-        <Container>
-          <SectionIntroBlock content={aboutPageContent.governance} />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {institutionalHighlights.map(({ title, description, icon: Icon }) => (
-              <motion.article
-                key={title}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-sm hover:shadow-lg"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
-                  <Icon aria-hidden="true" size={28} />
-                </div>
-                <h3 className="mt-6 text-2xl font-bold text-aims-navy">{title}</h3>
-                <p className="mt-4 text-base leading-8 text-slate-600">{description}</p>
-              </motion.article>
-            ))}
-          </div>
-        </Container>
-      </AnimatedSection>
-
-      <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
-        <Container>
-          <div className="max-w-3xl">
-            <p className="font-semibold uppercase tracking-[0.2em] text-aims-gold">
-              {aboutPageContent.academicLeadership.eyebrow}
-            </p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              {aboutPageContent.academicLeadership.title}
-            </h2>
-            <p className="mt-5 text-base leading-8 text-blue-100 sm:text-lg">
-              {aboutPageContent.academicLeadership.description}
-            </p>
-          </div>
-
-          <AcademicLeadershipCarousel profiles={academicLeadershipProfiles} />
-        </Container>
-      </AnimatedSection>
-
-      <AnimatedSection className="bg-aims-sky py-18 sm:py-20 lg:py-24">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-            <SectionIntroBlock content={aboutPageContent.research} />
-            <div className="rounded-[1.75rem] border border-aims-blue/10 bg-white p-6 shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
-                  <Quote aria-hidden="true" size={22} />
-                </div>
-                <p className="text-base leading-7 text-slate-600">
-                  Research-focused events at AIMS Campus are designed to strengthen academic dialogue, professional exchange and doctoral community building.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
-            {researchGallery.map((image, index) => (
-              <motion.figure
-                key={image.title}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                className={`overflow-hidden rounded-[1.75rem] shadow-md ${
-                  index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
-                }`}
-              >
-                <img
-                  src={image.image}
-                  alt={image.alt}
-                  loading="lazy"
-                  className={`w-full object-cover ${
-                    index === 0 ? 'h-80 sm:h-[28rem] lg:h-full' : 'h-64 sm:h-72 lg:h-full'
-                  }`}
-                />
-              </motion.figure>
-            ))}
-          </div>
-        </Container>
-      </AnimatedSection>
 
       <section className="relative isolate overflow-hidden py-20 text-white sm:py-24">
         <img

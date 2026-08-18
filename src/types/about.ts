@@ -31,6 +31,22 @@ export interface AboutIntroductionContent extends SectionIntro {
   imageBadge: string;
 }
 
+export interface ChairmanMessageContent {
+  role: string;
+  campus: string;
+  title: string;
+  name: string;
+  paragraphs: string[];
+  image: string;
+  imageAlt: string;
+}
+
+export interface BoardGovernanceMember {
+  name: string;
+  image: string;
+  imageAlt: string;
+}
+
 export interface ExcellencePillar {
   title: string;
   description: string;
@@ -110,6 +126,7 @@ export interface AboutPageContent {
   vision: AboutValueStatement;
   mission: AboutValueStatement;
   introduction: AboutIntroductionContent;
+  chairmanMessage: ChairmanMessageContent;
   pillars: SectionIntro;
   history: HistorySectionContent;
   partners: SectionIntro;

@@ -90,7 +90,7 @@ export function ProgrammeDetailsPage() {
 
   return (
     <div className="bg-white text-slate-800">
-      <section className="relative overflow-hidden bg-aims-navy py-16 text-white">
+      <section className="relative overflow-hidden bg-aims-section py-16 text-white">
         {/* quiet dot-grid texture, echoes the pattern already used on the programme's own hero image */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:22px_22px]"

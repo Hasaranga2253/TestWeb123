@@ -1,21 +1,20 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'motion/react';
-import { ArrowLeft, ArrowRight, Award, CheckCircle2, Quote } from 'lucide-react';
+import { ArrowRight, Award, CheckCircle2, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Container } from '../components/common/Container';
 import aboutHeroVideo from '../assets/videos/Sequence 02.mp4';
 import historyVideo from '../assets/videos/AMIS_Campus_Video_v2.mp4';
 import {
-  academicLeadershipProfiles,
   aboutPageContent,
   aboutStats,
   boardGovernanceMembers,
   excellencePillars,
+  senateMembers,
 } from '../data/about';
-import type { AcademicLeaderProfile, SectionIntro } from '../types/about';
+import type { SectionIntro } from '../types/about';
 
 const sectionReveal = {
   initial: { opacity: 0, y: 30 },
@@ -58,175 +57,6 @@ function SectionIntroBlock({
           {content.description}
         </p>
       ) : null}
-    </div>
-  );
-}
-
-function getProfileInitials(name: string) {
-  const cleanedName = name
-    .replace('Prof. (Dr.)', '')
-    .replace('Prof.', '')
-    .replace('Dr.', '')
-    .replace('Mr.', '')
-    .replace('Ms.', '')
-    .trim();
-  const parts = cleanedName.split(/\s+/).filter(Boolean);
-
-  if (parts.length === 0) {
-    return 'AC';
-  }
-
-  if (parts.length === 1) {
-    return parts[0].slice(0, 2).toUpperCase();
-  }
-
-  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-}
-
-function AcademicLeadershipCarousel({
-  profiles,
-}: {
-  profiles: AcademicLeaderProfile[];
-}) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    loop: true,
-  });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const scrollPrev = useCallback(() => {
-    emblaApi?.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    emblaApi?.scrollNext();
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) {
-      return;
-    }
-
-    const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-      setScrollSnaps(emblaApi.scrollSnapList());
-    };
-
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-
-    return () => {
-      emblaApi.off('select', onSelect);
-      emblaApi.off('reInit', onSelect);
-    };
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi || isPaused) {
-      return;
-    }
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
-    const autoplayId = window.setInterval(() => {
-      emblaApi.scrollNext();
-    }, 4800);
-
-    return () => window.clearInterval(autoplayId);
-  }, [emblaApi, isPaused]);
-
-  return (
-    <div
-      className="mt-12"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <p className="max-w-2xl text-sm leading-7 text-blue-100 sm:text-base">
-          Names and role details are arranged from the governance and senate information visible in the materials you shared.
-        </p>
-
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={scrollPrev}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/18"
-            aria-label="Show previous academic leadership profile"
-          >
-            <ArrowLeft aria-hidden="true" size={18} />
-          </button>
-          <button
-            type="button"
-            onClick={scrollNext}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/18"
-            aria-label="Show next academic leadership profile"
-          >
-            <ArrowRight aria-hidden="true" size={18} />
-          </button>
-        </div>
-      </div>
-
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="-ml-4 flex">
-          {profiles.map((profile) => (
-            <div
-              key={profile.name}
-              className="min-w-0 flex-[0_0_100%] pl-4 sm:flex-[0_0_50%] xl:flex-[0_0_33.333%]"
-            >
-              <motion.article
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2 }}
-                className="flex h-full flex-col rounded-[1.75rem] border border-white/10 bg-white p-7 text-slate-800 shadow-xl"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-aims-sky text-lg font-bold text-aims-blue">
-                    {getProfileInitials(profile.name)}
-                  </div>
-
-                  <div className="flex flex-wrap justify-end gap-2">
-                    {profile.groups.map((group) => (
-                      <span
-                        key={`${profile.name}-${group}`}
-                        className="rounded-full bg-aims-sky px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-aims-blue"
-                      >
-                        {group}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <h3 className="mt-6 text-2xl font-bold leading-tight text-aims-navy">
-                  {profile.name}
-                </h3>
-                <p className="mt-4 text-base leading-7 text-slate-600">
-                  {profile.title}
-                </p>
-              </motion.article>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-wrap items-center gap-2">
-        {scrollSnaps.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => emblaApi?.scrollTo(index)}
-            aria-label={`Go to academic leadership slide ${index + 1}`}
-            className={`h-2.5 rounded-full transition-all ${
-              index === selectedIndex
-                ? 'w-8 bg-aims-gold'
-                : 'w-2.5 bg-white/35 hover:bg-white/55'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -497,7 +327,7 @@ export function AboutPage() {
         </Container>
       </AnimatedSection>
 
-       <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
+       <AnimatedSection className="bg-aims-section py-18 text-white sm:py-20 lg:py-24">
         <Container>
           <div className="max-w-2xl">
             <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
@@ -553,21 +383,58 @@ export function AboutPage() {
       </AnimatedSection>
 
       
-      <AnimatedSection className="bg-aims-navy py-18 text-white sm:py-20 lg:py-24">
+      <AnimatedSection className="bg-aims-section py-18 text-white sm:py-20 lg:py-24">
         <Container>
-          <div className="max-w-3xl">
-            <p className="font-semibold uppercase tracking-[0.2em] text-aims-gold">
+          <div className="max-w-2xl">
+            <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
               {aboutPageContent.academicLeadership.eyebrow}
             </p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              {aboutPageContent.academicLeadership.title}
-            </h2>
-            <p className="mt-5 text-base leading-8 text-blue-100 sm:text-lg">
+
+            <div className="relative mt-5 inline-block overflow-hidden rounded-2xl bg-black px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:px-8 sm:py-6">
+              <span className="absolute inset-y-0 left-0 w-1.5 bg-aims-gold" aria-hidden="true" />
+              <h2 className="pl-3 text-3xl font-bold uppercase leading-tight tracking-[0.06em] sm:text-4xl lg:text-5xl">
+                Senate
+                <span className="block text-aims-gold">of AIMS Campus</span>
+              </h2>
+            </div>
+
+            <p className="mt-6 text-base leading-7 text-blue-100 sm:text-lg">
               {aboutPageContent.academicLeadership.description}
             </p>
           </div>
 
-          <AcademicLeadershipCarousel profiles={academicLeadershipProfiles} />
+          <div className="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-14 lg:gap-x-10">
+            {senateMembers.map((member) => (
+              <motion.figure
+                key={member.name}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="group w-[calc(50%-0.75rem)] max-w-[14rem] text-center sm:w-[calc(33.333%-1.25rem)]"
+              >
+                <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full border-4 border-white/10 shadow-xl transition duration-300 group-hover:border-aims-gold/70 sm:h-32 sm:w-32">
+                  <img
+                    src={member.image}
+                    alt={member.imageAlt}
+                    loading="lazy"
+                    className="h-full w-full scale-[1.7] object-cover object-top transition duration-300 group-hover:scale-[1.8]"
+                  />
+                  <div
+                    className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/15"
+                    aria-hidden="true"
+                  />
+                </div>
+
+                <figcaption className="mt-5">
+                  <p className="text-base font-semibold leading-6 tracking-[0.04em] text-white">
+                    {member.name}
+                  </p>
+                  <span className="mt-2 inline-block text-[11px] font-semibold uppercase leading-5 tracking-[0.12em] text-aims-gold/80">
+                    {member.title}
+                  </span>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
         </Container>
       </AnimatedSection>
 
@@ -627,51 +494,54 @@ export function AboutPage() {
 
 
 
-      <section className="relative isolate overflow-hidden py-20 text-white sm:py-24">
-        <img
-          src={aboutPageContent.cta.image}
-          alt={aboutPageContent.cta.imageAlt}
-          aria-hidden={aboutPageContent.cta.imageAlt === '' ? 'true' : undefined}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+      <section className="relative isolate overflow-hidden bg-aims-section py-16 text-white sm:py-20 lg:py-24">
         <div
-          className="absolute inset-0 bg-linear-to-r from-[#04122d]/95 via-[#071d49]/88 to-[#123f91]/78"
+          className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]"
+          aria-hidden="true"
+        />
+                <div
+          className="pointer-events-none absolute -left-28 -top-28 h-80 w-80 rounded-full bg-aims-blue/20 blur-3xl"
           aria-hidden="true"
         />
 
-        <Container className="relative z-10">
+        <div
+          className="pointer-events-none absolute -bottom-32 -right-24 h-96 w-96 rounded-full bg-[#123f91]/45 blur-3xl"
+          aria-hidden="true"
+        />
           <motion.div
             {...sectionReveal}
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-3xl px-2 text-center sm:px-4 lg:px-0"
           >
-            <p className="font-semibold uppercase tracking-[0.2em] text-aims-gold">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-aims-gold sm:text-sm sm:tracking-[0.2em]">
               Ready for what comes next
             </p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+
+            <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold leading-[1.12] sm:text-4xl lg:text-5xl">
               {aboutPageContent.cta.title}
             </h2>
-            <p className="mt-5 text-base leading-8 text-blue-100 sm:text-lg">
+
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-blue-100 sm:text-base sm:leading-8 lg:text-lg">
               {aboutPageContent.cta.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
               <Link
                 to={aboutPageContent.cta.primaryHref}
-                className="inline-flex items-center gap-2 rounded-full bg-aims-gold px-7 py-3.5 font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-xl"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-aims-gold px-6 py-3 text-sm font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-xl sm:w-auto sm:px-7 sm:py-3.5 sm:text-base"
               >
                 {aboutPageContent.cta.primaryLabel}
                 <ArrowRight aria-hidden="true" size={18} />
               </Link>
+
               <Link
                 to={aboutPageContent.cta.secondaryHref}
-                className="inline-flex items-center rounded-full border border-white/40 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base"
               >
                 {aboutPageContent.cta.secondaryLabel}
               </Link>
             </div>
           </motion.div>
-        </Container>
+        
       </section>
     </div>
   );

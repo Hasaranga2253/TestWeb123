@@ -8,14 +8,30 @@ import {
 
 import aboutFallbackImage from '../assets/images/d9137cae-bb2f-4b7a-b543-5f9b612e3ac9.png';
 import chairmanImage from '../assets/images/chairman.jpeg';
-import hh from '../assets/images/Waidyasekara.png';
+import drKithsiriImage from '../assets/images/Dr.Kithsiri.png';
+import profUdithImage from '../assets/images/Prof.Udith.png';
+import profPrathibaImage from '../assets/images/Prof.Prathiba.png';
+import profWaidyasekaraImage from '../assets/images/Waidyasekara.png';
+import profSamathImage from '../assets/images/Prof.Samath.png';
+import profJagathImage from '../assets/images/Prf.Jagath.png';
+import drGodwinImage from '../assets/images/Dr.Godvin.png';
+import mrUpulImage from '../assets/images/Mr.Upul.png';
+import drSanjeewaImage from '../assets/images/Dr.Sanjeewa.png';
+import msEnakshiImage from '../assets/images/Ms.Enakshi.png';
+import drVirajImage from '../assets/images/Dr.Viraj.png';
+import drThamaraImage from '../assets/images/Dr.Thamara.png';
+import msNilushaImage from '../assets/images/Ms.Nilusha.png';
+import msChandrikaImage from '../assets/images/Dr.Chandrika.png';
+import mrKanishkaImage from '../assets/images/Mr.Kanishka.png';
+import drNeilImage from '../assets/images/Dr.Neil.png';
+import ctaImage from '../assets/images/about2.2.jpeg';
 import type {
-  AcademicLeaderProfile,
   AboutPageContent,
   AboutStat,
   BoardGovernanceMember,
   ExcellencePillar,
   HistoryMilestone,
+  SenateMember,
 } from '../types/about';
 
 /* =========================================================
@@ -84,10 +100,10 @@ export const aboutPageContent: AboutPageContent = {
   },
 
   academicLeadership: {
-    eyebrow: 'Academic leadership',
-    title: 'Meet our leadership and faculty profiles',
+    eyebrow: 'Senate',
+    title: 'Senate of AIMS Campus',
     description:
-      'This rotating profile showcase highlights the governance and senate community represented at AIMS Campus, helping visitors quickly recognise key academic leaders.',
+      'The academic senate providing faculty leadership, programme oversight and scholarly direction at AIMS Campus.',
   },
 
   cta: {
@@ -95,8 +111,8 @@ export const aboutPageContent: AboutPageContent = {
     description:
       'Explore recognised academic pathways designed to support your education, professional development and future ambitions.',
 
-    image: aboutFallbackImage,
-    imageAlt: '',
+    image: ctaImage,
+    imageAlt: 'Students at AIMS Campus beginning their academic journey.',
 
     primaryLabel: 'Explore programmes',
     primaryHref: '/programmes',
@@ -116,7 +132,7 @@ export const aboutStats: AboutStat[] = [
     label: 'Established',
   },
   {
-    value: '39',
+    value: '40',
     label: 'Years of excellence',
   },
   {
@@ -136,73 +152,73 @@ export const aboutStats: AboutStat[] = [
 export const boardGovernanceMembers: BoardGovernanceMember[] = [
   {
     name: 'Dr. Kithsiri Manchanayakke',
-    image: hh,
+    image: drKithsiriImage,
     imageAlt: 'Dr. Kithsiri Manchanayakke.',
   },
 
   {
     name: 'Prof. Udith Jayasinghe',
-    image: aboutFallbackImage,
+    image: profUdithImage,
     imageAlt: 'Prof. Udith Jayasinghe.',
   },
 
   {
     name: 'Prof. Prathiba Mahanamahewa',
-    image: aboutFallbackImage,
+    image: profPrathibaImage,
     imageAlt: 'Prof. Prathiba Mahanamahewa.',
   },
 
   {
     name: 'Prof. Sirimewan Waidyasekara',
-    image: aboutFallbackImage,
+    image: profWaidyasekaraImage,
     imageAlt: 'Prof. Sirimewan Waidyasekara.',
   },
 
   {
     name: 'Prof. (Dr.) Samath Darmarathne',
-    image: aboutFallbackImage,
+    image: profSamathImage,
     imageAlt: 'Prof. (Dr.) Samath Darmarathne.',
   },
 
   {
     name: 'Prof. Jagath Edirisinghe',
-    image: aboutFallbackImage,
+    image: profJagathImage,
     imageAlt: 'Prof. Jagath Edirisinghe.',
   },
 
   {
     name: 'Dr. Neil Bogahalande',
-    image: aboutFallbackImage,
+    image: drNeilImage,
     imageAlt: 'Dr. Neil Bogahalande.',
   },
 
   {
     name: 'Dr. Godwin Kodituwakku',
-    image: aboutFallbackImage,
+    image: drGodwinImage,
     imageAlt: 'Dr. Godwin Kodituwakku.',
   },
 
   {
     name: 'Mr. Upul Dassanayake',
-    image: aboutFallbackImage,
+    image: mrUpulImage,
     imageAlt: 'Mr. Upul Dassanayake.',
   },
 
   {
     name: 'Dr. Sanjeewa Samarasinghe',
-    image: aboutFallbackImage,
+    image: drSanjeewaImage,
     imageAlt: 'Dr. Sanjeewa Samarasinghe.',
   },
 
   {
     name: 'Ms. Enakshi Manchanayake',
-    image: aboutFallbackImage,
+    image: msEnakshiImage,
     imageAlt: 'Ms. Enakshi Manchanayake.',
   },
 
   {
     name: 'Mr. Kanishka Manchanayake',
-    image: aboutFallbackImage,
+    image: mrKanishkaImage,
     imageAlt: 'Mr. Kanishka Manchanayake.',
   },
 ];
@@ -283,104 +299,64 @@ export const historyMilestones: HistoryMilestone[] = [
 ];
 
 /* =========================================================
-   ACADEMIC LEADERSHIP
+   SENATE
 ========================================================= */
 
-export const academicLeadershipProfiles: AcademicLeaderProfile[] = [
+export const senateMembers: SenateMember[] = [
   {
     name: 'Dr. Kithsiri Manchanayakke',
     title: 'Chancellor',
-    groups: ['Senate', 'Board of Governance'],
+    image: drKithsiriImage,
+    imageAlt: 'Dr. Kithsiri Manchanayakke.',
   },
 
   {
     name: 'Prof. Sirimewan Waidyasekara',
     title: 'Director of Studies',
-    groups: ['Senate', 'Board of Governance'],
+    image: profWaidyasekaraImage,
+    imageAlt: 'Prof. Sirimewan Waidyasekara.',
   },
 
   {
     name: 'Prof. Prathiba Mahanamahewa',
     title: 'Dean - Faculty of Law',
-    groups: ['Senate', 'Board of Governance'],
+    image: profPrathibaImage,
+    imageAlt: 'Prof. Prathiba Mahanamahewa.',
   },
 
   {
-    name: 'Prof. (Dr.) Samath Darmarathne',
+    name: 'Prof. (Dr.) Samath Dharmarathne',
     title: 'Dean - Faculty of Health Sciences & Nursing',
-    groups: ['Senate', 'Board of Governance'],
+    image: profSamathImage,
+    imageAlt: 'Prof. (Dr.) Samath Dharmarathne.',
   },
 
   {
     name: 'Dr. Viraj Pinto Jayawardena',
     title: 'Dean - Faculty of Business, Finance & IT',
-    groups: ['Senate'],
+    image: drVirajImage,
+    imageAlt: 'Dr. Viraj Pinto Jayawardena.',
   },
 
   {
     name: 'Dr. Thamara Dayanada',
     title: 'Dean - Faculty of Education & Psychology',
-    groups: ['Senate'],
+    image: drThamaraImage,
+    imageAlt: 'Dr. Thamara Dayanada.',
   },
 
   {
     name: 'Ms. Nilusha De Silva',
     title:
       'Dean - Faculty of Languages and Professional Studies, Senior Manager Partnerships',
-    groups: ['Senate'],
+    image: msNilushaImage,
+    imageAlt: 'Ms. Nilusha De Silva.',
   },
 
   {
     name: 'Ms. Chandrika Fernando',
     title: 'Head of R&D and New Partnerships',
-    groups: ['Senate'],
-  },
-
-  {
-    name: 'Prof. Udith Jayasinghe',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Prof. Jagath Edirisinghe',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Dr. Neil Bogahalande',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Dr. Godwin Kodituwakku',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Mr. Upul Dassanayake',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Dr. Sanjeewa Samarasinghe',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Ms. Enakshi Manchanayake',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
-  },
-
-  {
-    name: 'Mr. Kanishka Manchanayake',
-    title: 'Board of Governance member',
-    groups: ['Board of Governance'],
+    image: msChandrikaImage,
+    imageAlt: 'Ms. Chandrika Fernando.',
   },
 ];

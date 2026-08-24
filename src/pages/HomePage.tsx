@@ -123,6 +123,7 @@ type FeaturedProgramme = {
   description: string;
   focus: string;
   image: string;
+  to: string;
 };
 
 const featuredProgrammes: FeaturedProgramme[] = [
@@ -133,6 +134,7 @@ const featuredProgrammes: FeaturedProgramme[] = [
       'Build study, presentation and foundation mathematics skills for progression into higher education.',
     focus: 'Entry pathway',
     image: foundationProgrammeImage,
+    to: '/programmes/foundation',
   },
   {
     tag: 'Undergraduate route',
@@ -141,6 +143,7 @@ const featuredProgrammes: FeaturedProgramme[] = [
       'Build software, web, mobile, cloud and cybersecurity capabilities for modern computing careers.',
     focus: 'Computing degree',
     image: AppliedComputing,
+    to: '/programmes/applied-computing',
   },
   {
     tag: 'Undergraduate route',
@@ -149,6 +152,7 @@ const featuredProgrammes: FeaturedProgramme[] = [
       'Develop teaching, learning, assessment and curriculum skills for education and training roles.',
     focus: 'Education degree',
     image: EduStudy,
+    to: '/programmes/education',
   },
   {
     tag: 'Undergraduate route',
@@ -157,6 +161,7 @@ const featuredProgrammes: FeaturedProgramme[] = [
       'Strengthen leadership, entrepreneurship, finance and global business knowledge for management careers.',
     focus: 'Business degree',
     image: IBM,
+    to: '/programmes/international-business-management',
   },
 ];
 
@@ -430,7 +435,7 @@ function ProgrammeShowcase() {
                     </p>
 
                     <Link
-                      to="/programmes"
+                      to={item.to}
                       aria-label={`Explore ${item.focus}`}
                       className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-aims-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-gold"
                     >
@@ -516,7 +521,7 @@ function HeroSlider() {
   const hasDetails = Boolean(slide.details);
 
   return (
-    <section className="relative flex h-[calc(100vh-104px)] items-center overflow-hidden bg-aims-navy">
+    <section className="relative flex h-[calc(100vh-104px)] items-center overflow-hidden bg-aims-section">
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={index}

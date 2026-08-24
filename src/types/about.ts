@@ -104,10 +104,11 @@ export interface InstitutionalHighlight {
   icon: LucideIcon;
 }
 
-export interface AcademicLeaderProfile {
+export interface SenateMember {
   name: string;
   title: string;
-  groups: string[];
+  image: string;
+  imageAlt: string;
 }
 
 export interface CtaContent {
@@ -125,16 +126,16 @@ export interface AboutPageContent {
   hero: AboutHeroContent;
   vision: AboutValueStatement;
   mission: AboutValueStatement;
-  introduction: AboutIntroductionContent;
+  introduction?: AboutIntroductionContent;
   chairmanMessage: ChairmanMessageContent;
   pillars: SectionIntro;
   history: HistorySectionContent;
-  partners: SectionIntro;
-  pathways: SectionIntro;
-  campuses: SectionIntro;
-  lifeAtAims: SectionIntro;
-  governance: SectionIntro;
+  partners?: SectionIntro;
+  pathways?: SectionIntro;
+  campuses?: SectionIntro;
+  lifeAtAims?: SectionIntro;
+  governance?: SectionIntro;
   academicLeadership: SectionIntro;
-  research: SectionIntro;
+  research?: SectionIntro;
   cta: CtaContent;
 }

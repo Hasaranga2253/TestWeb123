@@ -382,7 +382,7 @@ export function AboutPage() {
         </Container>
       </AnimatedSection>
 
-      
+
       <AnimatedSection className="bg-aims-section py-18 text-white sm:py-20 lg:py-24">
         <Container>
           <div className="max-w-2xl">
@@ -541,7 +541,7 @@ export function AboutPage() {
               </Link>
             </div>
           </motion.div>
-        
+
       </section>
     </div>
   );

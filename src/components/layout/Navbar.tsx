@@ -345,7 +345,7 @@ export function Navbar() {
         </Container>
       </header>
 
-      
+
 
       <div
         className="h-[124px]"

@@ -71,14 +71,14 @@ export function ProgrammesPage() {
   return (
     <div className="bg-white text-slate-800">
       {/* HERO */}
-      <section className="overflow-hidden border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,rgba(18,63,145,0.08),transparent_34%),linear-gradient(180deg,rgba(248,250,252,1),rgba(255,255,255,1))] py-20">
+      <section className="overflow-hidden border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,rgba(18,63,145,0.08),transparent_34%),linear-gradient(180deg,rgba(248,250,252,1),rgba(255,255,255,1))] py-14 sm:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-aims-blue">
                 Programmes
               </p>
-              <h1 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-aims-navy sm:text-5xl">
+              <h1 className="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-aims-navy sm:text-5xl">
                 From your O/Levels to a UK degree, mapped stage by stage
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
@@ -88,17 +88,17 @@ export function ProgrammesPage() {
                 fees.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href="#courses"
-                  className="inline-flex items-center gap-2 rounded-full bg-aims-navy px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-aims-blue"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-aims-navy px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-aims-blue"
                 >
                   Browse courses
                   <ArrowRight size={16} aria-hidden="true" />
                 </a>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 font-semibold text-aims-navy transition hover:-translate-y-0.5 hover:border-aims-blue/30 hover:text-aims-blue"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 font-semibold text-aims-navy transition hover:-translate-y-0.5 hover:border-aims-blue/30 hover:text-aims-blue"
                 >
                   Contact admissions
                 </Link>
@@ -198,7 +198,7 @@ export function ProgrammesPage() {
       </section>
 
       {/* COURSES */}
-      <section id="courses" className="py-20">
+      <section id="courses" className="py-14 sm:py-20">
         <Container>
           <header className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-aims-blue">
@@ -231,12 +231,12 @@ export function ProgrammesPage() {
                   whileHover={{ y: -6 }}
                   className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_14px_40px_rgba(7,29,73,0.08)]"
                 >
-                  <div className="grid h-full gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-                    <div className="relative h-full min-h-[18rem]">
+                  <div className="flex h-full flex-col lg:grid lg:grid-cols-[0.9fr_1.1fr]">
+                    <div className="relative shrink-0 overflow-hidden bg-slate-100 lg:h-full lg:min-h-[18rem]">
                       <img
                         src={programme.image}
                         alt={programme.title}
-                        className="absolute inset-0 h-full w-full object-cover"
+                        className="h-60 w-full object-cover object-top sm:h-72 lg:absolute lg:inset-0 lg:h-full"
                         loading="lazy"
                       />
                       <div
@@ -248,16 +248,18 @@ export function ProgrammesPage() {
                       </div>
                     </div>
 
-                    <div className="flex h-full flex-col p-6 sm:p-7">
-                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-aims-gold">
+                    <div className="flex min-h-0 flex-col bg-white p-5 sm:p-7">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-aims-gold sm:text-sm sm:tracking-[0.18em]">
                         {programme.focus}
                       </p>
-                      <h3 className="mt-2 text-2xl font-bold leading-tight text-aims-navy">
+                      <h3 className="mt-2 text-xl font-bold leading-tight text-aims-navy sm:text-2xl">
                         {programme.title}
                       </h3>
-                      <p className="mt-4 leading-7 text-slate-600">{programme.summary}</p>
+                      <p className="mt-3 text-sm leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-7">
+                        {programme.summary}
+                      </p>
 
-                      <div className="mt-5 flex flex-wrap gap-4 text-sm text-slate-500">
+                      <div className="mt-4 flex flex-col gap-2 text-sm text-slate-500 sm:mt-5 sm:flex-row sm:flex-wrap sm:gap-4">
                         <span className="inline-flex items-center gap-1.5">
                           <Layers3 size={14} className="text-aims-blue" aria-hidden="true" />
                           {totalModules} modules · {programme.moduleGroups.length} stages
@@ -268,34 +270,38 @@ export function ProgrammesPage() {
                         </span>
                       </div>
 
-                      <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-3">
+                      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-3">
                         {programme.routeSteps.slice(0, 3).map((step, stepIndex, steps) => (
-                          <div key={step} className="flex items-center gap-2">
-                            <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600">
+                          <div key={step} className="flex min-w-0 items-center gap-2">
+                            <span className="inline-flex w-full min-w-0 items-start gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium leading-5 text-slate-600 sm:w-auto sm:items-center sm:rounded-full sm:py-1.5">
                               <CheckCircle2 size={12} className="text-aims-blue" aria-hidden="true" />
                               {step}
                             </span>
                             {stepIndex < steps.length - 1 && (
-                              <ArrowRight size={12} className="shrink-0 text-slate-300" aria-hidden="true" />
+                              <ArrowRight
+                                size={12}
+                                className="hidden shrink-0 text-slate-300 sm:block"
+                                aria-hidden="true"
+                              />
                             )}
                           </div>
                         ))}
                       </div>
 
-                      <div className="mt-auto flex flex-wrap gap-3 pt-6">
+                      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                         <Link
                           to={
                             programmeNavLinks.find((item) => item.slug === programme.slug)?.to ??
                             '/programmes'
                           }
-                          className="inline-flex items-center gap-2 rounded-full bg-aims-navy px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-aims-blue"
+                          className="inline-flex items-center justify-center gap-2 rounded-full bg-aims-navy px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-aims-blue"
                         >
                           View details
                           <ArrowRight size={16} aria-hidden="true" />
                         </Link>
                         <Link
                           to="/contact"
-                          className="inline-flex items-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-aims-blue/30 hover:text-aims-blue"
+                          className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-aims-blue/30 hover:text-aims-blue"
                         >
                           Apply / enquire
                         </Link>

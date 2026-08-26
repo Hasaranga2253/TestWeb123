@@ -124,8 +124,8 @@ export function Footer() {
         aria-hidden="true"
       />
 
-      <Container className="relative py-16 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:gap-10">
+      <Container className="relative py-14 sm:py-20">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:gap-10">
           {/* =================================================
               BRAND
           ================================================== */}

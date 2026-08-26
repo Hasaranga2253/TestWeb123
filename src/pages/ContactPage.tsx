@@ -269,42 +269,42 @@ export function ContactPage() {
           HERO
       ====================================================== */}
 
-      <section className="relative isolate flex min-h-[620px] items-center overflow-hidden text-white sm:min-h-[660px] lg:min-h-[720px]">
+      <section className="relative isolate flex min-h-[760px] items-center overflow-hidden bg-[#031437] text-white sm:min-h-[660px] lg:min-h-[720px]">
         <img
           src={contactPageContent.hero.image}
           alt={contactPageContent.hero.imageAlt}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center"
         />
 
 {/* Main navy mask - reduced */}
 <div
-  className="pointer-events-none absolute inset-0 bg-[#041b48]/20"
+  className="pointer-events-none absolute inset-0 bg-[#041b48]/10 sm:bg-[#041b48]/20"
   aria-hidden="true"
 />
 
 {/* Responsive gradient - reduced */}
 <div
-  className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#031437]/40 via-[#06245a]/25 to-[#031437]/55 sm:bg-linear-to-r sm:from-[#031437]/65 sm:via-[#06245a]/35 sm:to-[#06245a]/10"
+  className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#031437]/55 via-[#06245a]/30 to-[#031437]/65 sm:bg-linear-to-r sm:from-[#031437]/65 sm:via-[#06245a]/35 sm:to-[#06245a]/10"
   aria-hidden="true"
 />
 
         {/* quiet dot-grid texture for depth */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]"
+          className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:radial-gradient(circle,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px] sm:opacity-[0.07]"
           aria-hidden="true"
         />
 
         {/* Decorative glow */}
         <div
-          className="pointer-events-none absolute -right-32 top-10 h-[28rem] w-[28rem] rounded-full bg-aims-blue/20 blur-3xl"
+          className="pointer-events-none absolute -right-32 top-10 h-[28rem] w-[28rem] rounded-full bg-aims-blue/12 blur-3xl sm:bg-aims-blue/20"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-aims-gold/10 blur-3xl"
+          className="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-aims-gold/8 blur-3xl sm:bg-aims-gold/10"
           aria-hidden="true"
         />
 
-        <Container className="relative z-10 w-full py-20 sm:py-24 lg:py-28">
+        <Container className="relative z-10 w-full py-14 sm:py-24 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -315,7 +315,7 @@ export function ContactPage() {
               {contactPageContent.hero.eyebrow}
             </span>
 
-            <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="mt-6 max-w-4xl text-3xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl xl:text-7xl">
               {contactPageContent.hero.title}
             </h1>
 
@@ -386,7 +386,7 @@ export function ContactPage() {
       {/* =================================================
           GENERAL SUPPORT
       ================================================== */}
-      <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_20px_60px_rgba(7,29,73,0.06)] sm:p-9">
+      <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_20px_60px_rgba(7,29,73,0.06)] sm:p-9">
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-aims-sky text-aims-blue">
             <Phone aria-hidden="true" size={20} />
@@ -438,7 +438,7 @@ export function ContactPage() {
       {/* =================================================
           STUDENT SUPPORT
       ================================================== */}
-      <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_20px_60px_rgba(7,29,73,0.06)] sm:p-9">
+      <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_20px_60px_rgba(7,29,73,0.06)] sm:p-9">
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-aims-sky text-aims-blue">
             <GraduationCap aria-hidden="true" size={22} />
@@ -721,7 +721,7 @@ export function ContactPage() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`relative overflow-hidden rounded-[2.25rem] border p-7 shadow-lg transition sm:p-9 ${
+                className={`relative overflow-hidden rounded-[2.25rem] border p-5 shadow-lg transition sm:p-9 ${
                   campus.featured
                     ? 'border-aims-blue/20 bg-aims-navy text-white'
                     : 'border-slate-200 bg-white text-slate-800'
@@ -873,7 +873,7 @@ export function ContactPage() {
                 title="AIMS Campus Colombo 07 location"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="h-[360px] w-full rounded-[1.5rem] border-0 sm:h-[430px] lg:h-[500px]"
+                className="h-[300px] w-full rounded-[1.5rem] border-0 sm:h-[430px] lg:h-[500px]"
                 allowFullScreen
               />
             </div>
@@ -903,7 +903,7 @@ export function ContactPage() {
                 rel="noreferrer"
                 whileHover={{ y: -4, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group inline-flex min-w-[160px] items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 font-semibold text-aims-navy shadow-sm transition hover:border-aims-blue/25 hover:shadow-lg"
+                className="group inline-flex min-w-[140px] items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 font-semibold text-aims-navy shadow-sm transition hover:border-aims-blue/25 hover:shadow-lg sm:min-w-[160px] sm:px-6"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200/80 transition group-hover:scale-105">
                   <SocialIcon platform={social.platform} />

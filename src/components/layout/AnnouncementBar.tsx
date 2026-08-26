@@ -5,7 +5,6 @@ import {
   FaLinkedinIn,
   FaTiktok,
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 
 import { Container } from '../common/Container';
 import { campusData } from '../../data/campus';
@@ -99,8 +98,10 @@ export function AnnouncementBar() {
           ================================================== */}
 
           <div className="justify-self-end">
-            <Link
-              to="/contact"
+            <a
+              href="https://lms.aimscampus.online/login/index.php"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-9 items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-aims-gold px-3 text-[11px] font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-lg sm:h-10 sm:gap-2 sm:px-5 sm:text-sm"
             >
               <span>Student Portal</span>
@@ -109,7 +110,7 @@ export function AnnouncementBar() {
                 aria-hidden="true"
                 size={15}
               />
-            </Link>
+            </a>
           </div>
         </div>
       </Container>

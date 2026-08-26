@@ -70,7 +70,7 @@ export function ProgrammeDetailsPage() {
       <section className="py-20">
         <Container>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-aims-blue">Programme</p>
-          <h1 className="mt-3 text-4xl font-bold text-aims-navy">Programme not found</h1>
+          <h1 className="mt-3 text-3xl font-bold text-aims-navy sm:text-4xl">Programme not found</h1>
           <p className="mt-4 max-w-2xl text-slate-600">
             The selected programme page does not exist.
           </p>
@@ -119,7 +119,7 @@ export function ProgrammeDetailsPage() {
                 </p>
               </div>
 
-              <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+              <h1 className="mt-5 max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">
                 {programme.title}
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-blue-100">
@@ -138,17 +138,17 @@ export function ProgrammeDetailsPage() {
                 ))}
               </ul>
 
-              <div className="mt-9 flex flex-wrap gap-4">
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-aims-gold px-6 py-3.5 font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-xl"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-aims-gold px-6 py-3.5 font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-xl"
                 >
                   Enquire now
                   <ArrowRight size={16} aria-hidden="true" />
                 </Link>
                 <a
                   href="#modules"
-                  className="inline-flex items-center rounded-full border border-white/20 bg-white/8 px-6 py-3.5 font-semibold text-white transition hover:bg-white/12"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-6 py-3.5 font-semibold text-white transition hover:bg-white/12"
                 >
                   View modules
                 </a>
@@ -158,7 +158,7 @@ export function ProgrammeDetailsPage() {
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.25 }}
-              className={`relative flex h-[20rem] flex-col overflow-hidden rounded-[2rem] bg-linear-to-br ${programme.accentClass} shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:h-[24rem] lg:h-[30rem]`}
+              className={`relative flex min-h-[24rem] flex-col overflow-hidden rounded-[2rem] bg-linear-to-br ${programme.accentClass} shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:min-h-[24rem] lg:min-h-[30rem]`}
             >
               {/* built entirely from shapes, rings and icons in the programme's own accent colour — no stock photography */}
               <div
@@ -208,7 +208,7 @@ export function ProgrammeDetailsPage() {
                 {programme.eyebrow}
               </p>
 
-              <div className="relative z-10 flex divide-x divide-white/10 border-t border-white/10 bg-[#03122a]/70 backdrop-blur-sm">
+              <div className="relative z-10 grid divide-y divide-white/10 border-t border-white/10 bg-[#03122a]/70 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                 <div className="flex flex-1 items-center gap-3 p-4">
                   <Compass className="shrink-0 text-aims-gold" size={18} aria-hidden="true" />
                   <div>
@@ -237,7 +237,7 @@ export function ProgrammeDetailsPage() {
         </Container>
       </section>
 
-      <section className="py-20" id="modules">
+      <section className="py-14 sm:py-20" id="modules">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
@@ -264,7 +264,7 @@ export function ProgrammeDetailsPage() {
                         type="button"
                         onClick={() => setActiveGroup(index)}
                         aria-current={isActive}
-                        className={`group flex shrink-0 items-start gap-3 rounded-2xl px-4 py-3 text-left transition md:-ml-px md:shrink md:rounded-none md:border-l-2 md:px-5 md:py-4 ${
+                        className={`group flex max-w-[17rem] shrink-0 items-start gap-3 rounded-2xl px-4 py-3 text-left transition md:max-w-none md:-ml-px md:shrink md:rounded-none md:border-l-2 md:px-5 md:py-4 ${
                           isActive
                             ? 'bg-aims-navy text-white md:border-l-aims-gold md:bg-aims-navy/[0.04] md:text-aims-navy'
                             : 'border border-slate-200 text-slate-600 hover:border-aims-blue/30 hover:text-aims-navy md:border-l-transparent md:border-y-0 md:border-r-0'
@@ -349,7 +349,7 @@ export function ProgrammeDetailsPage() {
                   {programme.fees.map((item) => (
                     <li key={item.label} className="flex items-start justify-between gap-4 py-3.5">
                       <span className="text-sm font-medium text-slate-600">{item.label}</span>
-                      <span className="text-right">
+                      <span className="shrink-0 text-right">
                         <span className="block font-mono text-sm font-semibold text-aims-navy">
                           {item.value}
                         </span>
@@ -380,7 +380,7 @@ export function ProgrammeDetailsPage() {
 
               <Link
                 to="/contact"
-                className="flex items-center justify-between gap-3 rounded-3xl bg-aims-navy p-6 text-white transition hover:bg-aims-blue"
+                className="flex flex-col items-start justify-between gap-3 rounded-3xl bg-aims-navy p-6 text-white transition hover:bg-aims-blue sm:flex-row sm:items-center"
               >
                 <span>
                   <span className="block text-sm font-semibold uppercase tracking-[0.18em] text-aims-gold">

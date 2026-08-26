@@ -145,7 +145,7 @@ function FloatingPillars({
 export function AboutPage() {
   return (
     <div className="bg-white text-slate-800">
-      <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden text-white">
+      <section className="relative isolate flex min-h-[560px] items-center overflow-hidden text-white sm:min-h-[70vh]">
         <video
     aria-hidden="true"
     autoPlay
@@ -170,7 +170,7 @@ export function AboutPage() {
     className="pointer-events-none absolute inset-0 bg-linear-to-r from-[#041a43]/35 via-[#0b3d82]/15 to-transparent"
     aria-hidden="true"
   />
-         <Container className="relative z-10 py-20 sm:py-24 lg:py-28">
+         <Container className="relative z-10 py-16 sm:py-24 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -180,7 +180,7 @@ export function AboutPage() {
             <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
               {aboutPageContent.hero.eyebrow}
             </p>
-            <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-5xl lg:text-6xl">
               {aboutPageContent.hero.title}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-blue-100 sm:text-lg">
@@ -215,7 +215,7 @@ export function AboutPage() {
             <motion.article
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
-              className="rounded-[2rem] bg-aims-navy p-8 text-white shadow-xl sm:p-10"
+              className="rounded-[2rem] bg-aims-navy p-6 text-white shadow-xl sm:p-10"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-aims-gold">
                 <Award aria-hidden="true" size={28} />
@@ -223,7 +223,7 @@ export function AboutPage() {
               <p className="mt-7 text-sm font-semibold uppercase tracking-[0.2em] text-aims-gold">
                 {aboutPageContent.vision.title}
               </p>
-              <p className="mt-5 text-2xl font-semibold leading-10">
+              <p className="mt-5 text-xl font-semibold leading-8 sm:text-2xl sm:leading-10">
                 {aboutPageContent.vision.description}
               </p>
             </motion.article>
@@ -231,7 +231,7 @@ export function AboutPage() {
             <motion.article
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
-              className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-lg sm:p-10"
+              className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg sm:p-10"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
                 <CheckCircle2 aria-hidden="true" size={28} />
@@ -249,7 +249,7 @@ export function AboutPage() {
 
       <AnimatedSection className="py-18 sm:py-20 lg:py-24">
         <Container>
-          <div className="relative isolate grid overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-2xl lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative isolate grid overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-2xl sm:rounded-[2.5rem] lg:grid-cols-[1.1fr_0.9fr]">
             {/* message */}
             <div className="relative px-7 py-10 sm:px-10 sm:py-12 lg:p-14">
               <Quote
@@ -313,12 +313,12 @@ export function AboutPage() {
                 </p>
               </div>
 
-              <div className="relative z-10 mt-8 flex min-h-[32rem] flex-1 items-end justify-end">
+              <div className="relative z-10 mt-8 flex min-h-[22rem] flex-1 items-end justify-center sm:min-h-[32rem] lg:justify-end">
                 <img
                   src={aboutPageContent.chairmanMessage.image}
                   alt={aboutPageContent.chairmanMessage.imageAlt}
                   loading="lazy"
-                  className="h-[34rem] w-auto max-w-none object-contain object-bottom drop-shadow-2xl sm:h-[40rem] lg:-mr-14 lg:h-[46rem] xl:-mr-20 xl:h-[50rem]"
+                  className="h-[26rem] w-auto max-w-full object-contain object-bottom drop-shadow-2xl sm:h-[40rem] lg:-mr-14 lg:h-[46rem] lg:max-w-none xl:-mr-20 xl:h-[50rem]"
                 />
 
               </div>
@@ -336,7 +336,7 @@ export function AboutPage() {
 
             <div className="relative mt-5 inline-block overflow-hidden rounded-2xl bg-black px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:px-8 sm:py-6">
               <span className="absolute inset-y-0 left-0 w-1.5 bg-aims-gold" aria-hidden="true" />
-              <h2 className="pl-3 text-3xl font-bold uppercase leading-tight tracking-[0.06em] sm:text-4xl lg:text-5xl">
+              <h2 className="pl-3 text-2xl font-bold uppercase leading-tight tracking-[0.04em] sm:text-4xl sm:tracking-[0.06em] lg:text-5xl">
                 Board of Governance
                 <span className="block text-aims-gold">of AIMS Campus</span>
               </h2>
@@ -392,7 +392,7 @@ export function AboutPage() {
 
             <div className="relative mt-5 inline-block overflow-hidden rounded-2xl bg-black px-6 py-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:px-8 sm:py-6">
               <span className="absolute inset-y-0 left-0 w-1.5 bg-aims-gold" aria-hidden="true" />
-              <h2 className="pl-3 text-3xl font-bold uppercase leading-tight tracking-[0.06em] sm:text-4xl lg:text-5xl">
+              <h2 className="pl-3 text-2xl font-bold uppercase leading-tight tracking-[0.04em] sm:text-4xl sm:tracking-[0.06em] lg:text-5xl">
                 Senate
                 <span className="block text-aims-gold">of AIMS Campus</span>
               </h2>
@@ -464,7 +464,7 @@ export function AboutPage() {
           {aboutPageContent.history.eyebrow}
         </p>
 
-        <h2 className="mx-auto mt-5 max-w-4xl text-4xl font-bold leading-[1.08] text-aims-navy sm:text-5xl lg:text-6xl">
+        <h2 className="mx-auto mt-5 max-w-4xl text-3xl font-bold leading-[1.08] text-aims-navy sm:text-5xl lg:text-6xl">
           {aboutPageContent.history.title}
         </h2>
 
@@ -476,7 +476,7 @@ export function AboutPage() {
   </div>
 
   {/* VIDEO - BELOW THE TEXT */}
-  <div className="relative h-[420px] overflow-hidden sm:h-[520px] lg:h-[620px]">
+  <div className="relative h-[320px] overflow-hidden sm:h-[520px] lg:h-[620px]">
     <video
       aria-hidden="true"
       autoPlay

@@ -269,9 +269,9 @@ function Section({
   return (
     <motion.section
       {...fadeUp}
-      className={`relative overflow-hidden py-20 ${className}`}
+      className={`relative overflow-hidden py-14 sm:py-20 ${className}`}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         {children}
       </div>
     </motion.section>
@@ -389,10 +389,10 @@ function ProgrammeShowcase() {
                 transition={{
                   duration: 0.22,
                 }}
-                className="group relative h-[30rem] overflow-hidden rounded-[2rem] shadow-2xl"
+                className="group relative overflow-hidden rounded-3xl bg-[#04122d] shadow-2xl sm:h-[30rem] sm:rounded-[2rem]"
               >
                 <div
-                  className={`absolute inset-0 bg-linear-to-br ${
+                  className={`absolute inset-0 hidden bg-linear-to-br sm:block ${
                     index % 3 === 0
                       ? 'from-blue-950/95 via-blue-900/75 to-sky-700/30'
                       : index % 3 === 1
@@ -406,38 +406,38 @@ function ProgrammeShowcase() {
                   src={item.image}
                   alt={`${item.focus} programme`}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover object-center opacity-75 transition duration-700 group-hover:scale-105"
+                  className="h-56 w-full object-cover object-center opacity-100 transition duration-700 group-hover:scale-105 sm:absolute sm:inset-0 sm:h-full sm:opacity-75"
                 />
 
                 <div
-                  className="absolute inset-0 bg-linear-to-t from-[#04122d]/92 via-[#04122d]/42 to-transparent"
+                  className="absolute inset-0 hidden bg-linear-to-t from-[#04122d]/92 via-[#04122d]/42 to-transparent sm:block"
                   aria-hidden="true"
                 />
 
-                <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-7">
-                  <span className="w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+                <div className="relative z-10 flex flex-col gap-5 p-5 sm:h-full sm:justify-between sm:gap-0 sm:p-7">
+                  <span className="w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur-sm sm:text-[11px] sm:tracking-[0.2em]">
                     {item.tag}
                   </span>
 
                   <div className="max-w-md">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-aims-gold">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-aims-gold sm:text-sm sm:tracking-[0.18em]">
                       {item.focus}
                     </p>
 
                     {item.title ? (
-                      <h3 className="mt-3 text-3xl font-bold leading-tight text-white">
+                      <h3 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">
                         {item.title}
                       </h3>
                     ) : null}
 
-                    <p className="mt-4 text-sm leading-7 text-blue-100">
+                    <p className="mt-3 text-sm leading-6 text-blue-100 sm:mt-4 sm:leading-7">
                       {item.description}
                     </p>
 
                     <Link
                       to={item.to}
                       aria-label={`Explore ${item.focus}`}
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-aims-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-gold"
+                      className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-aims-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-gold sm:mt-6 sm:w-auto"
                     >
                       Explore programmes
                       <ArrowRight
@@ -521,7 +521,7 @@ function HeroSlider() {
   const hasDetails = Boolean(slide.details);
 
   return (
-    <section className="relative flex h-[calc(100vh-104px)] items-center overflow-hidden bg-aims-section">
+    <section className="relative flex min-h-[calc(100vh-104px)] items-center overflow-hidden bg-aims-section py-12 sm:py-0">
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={index}
@@ -551,46 +551,11 @@ function HeroSlider() {
       </AnimatePresence>
 
       <div
-        className="absolute inset-0 bg-linear-to-r from-[#04152f]/94 via-[#071d49]/78 to-[#071d49]/20"
+        className="absolute inset-0 bg-linear-to-r from-[#04152f]/42 via-[#04152f]/10 to-transparent"
         aria-hidden="true"
       />
 
-      <div
-        className="absolute inset-y-0 left-0 w-[62%] bg-[radial-gradient(circle_at_left_center,rgba(26,95,204,0.32),transparent_62%)]"
-        aria-hidden="true"
-      />
-
-      <motion.div
-        aria-hidden="true"
-        animate={{
-          y: [0, -10, 0],
-          opacity: [0.35, 0.5, 0.35],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute left-[10%] top-[18%] hidden h-44 w-44 rounded-full bg-cyan-400/14 blur-3xl lg:block"
-      />
-
-      <motion.div
-        aria-hidden="true"
-        animate={{
-          y: [0, 12, 0],
-          x: [0, 8, 0],
-          opacity: [0.28, 0.42, 0.28],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 0.4,
-        }}
-        className="absolute bottom-[16%] left-[18%] hidden h-32 w-32 rounded-full bg-amber-300/12 blur-3xl lg:block"
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 sm:py-20 lg:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
         <div className="max-w-2xl">
           <AnimatePresence mode="wait">
             <motion.div
@@ -637,7 +602,7 @@ function HeroSlider() {
                 {slide.eyebrow}
               </p>
 
-              <h1 className="mt-5 max-w-xl text-4xl font-bold leading-tight text-white drop-shadow-[0_14px_30px_rgba(4,21,47,0.34)] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 max-w-xl text-3xl font-bold leading-tight text-white drop-shadow-[0_14px_30px_rgba(4,21,47,0.34)] sm:text-5xl lg:text-6xl">
                 {slide.title}
               </h1>
 
@@ -712,10 +677,10 @@ function HeroSlider() {
                 )}
               </div>
 
-              <div className="mt-9 flex flex-wrap gap-4">
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <Link
                   to="/programmes"
-                  className="inline-flex items-center gap-2 rounded-full bg-aims-gold px-6 py-3.5 font-semibold text-aims-dark shadow-[0_10px_28px_rgba(244,189,42,0.28)] transition hover:-translate-y-0.5 hover:shadow-xl"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-aims-gold px-6 py-3.5 font-semibold text-aims-dark shadow-[0_10px_28px_rgba(244,189,42,0.28)] transition hover:-translate-y-0.5 hover:shadow-xl"
                 >
                   Explore programmes
 
@@ -727,7 +692,7 @@ function HeroSlider() {
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center rounded-full border border-white/28 bg-white/6 px-6 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
+                  className="inline-flex items-center justify-center rounded-full border border-white/28 bg-white/6 px-6 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
                 >
                   Contact admissions
                 </Link>
@@ -976,7 +941,7 @@ export default function HomePage() {
               Why AIMS
             </p>
 
-            <h2 className="mt-3 text-4xl font-bold text-aims-navy">
+            <h2 className="mt-3 text-3xl font-bold text-aims-navy sm:text-4xl">
               Why choose AIMS?
             </h2>
 
@@ -1011,7 +976,7 @@ export default function HomePage() {
 
           <img
             src={WhyCaims}
-            className="w-full rounded-3xl object-cover shadow-xl"
+            className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl lg:aspect-auto"
             alt="AIMS Campus learning environment"
             loading="lazy"
           />
@@ -1028,7 +993,7 @@ export default function HomePage() {
             Explore pathways
           </p>
 
-          <h2 className="mt-3 text-4xl font-bold text-aims-navy">
+          <h2 className="mt-3 text-3xl font-bold text-aims-navy sm:text-4xl">
             Explore highlight programmes
           </h2>
 
@@ -1047,7 +1012,7 @@ export default function HomePage() {
 
       <Section className="bg-white">
         <header className="mx-auto max-w-3xl text-center">
-          <h2 className="mt-3 text-4xl font-bold text-aims-navy">
+          <h2 className="mt-3 text-3xl font-bold text-aims-navy sm:text-4xl">
             Our Schools
           </h2>
         </header>
@@ -1112,7 +1077,7 @@ export default function HomePage() {
             Trusted collaborations
           </p>
 
-          <h2 className="mt-3 text-4xl font-bold text-aims-navy">
+          <h2 className="mt-3 text-3xl font-bold text-aims-navy sm:text-4xl">
             Our academic partners
           </h2>
 

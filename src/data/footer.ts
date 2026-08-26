@@ -65,7 +65,7 @@ export const footerLinkGroups: FooterLinkGroup[] = [
       { label: 'About AIMS', href: '/about' },
       { label: 'Programmes', href: '/programmes' },
       { label: 'Contact admissions', href: '/contact' },
-      { label: 'Student Portal', href: 'https://portal.aimscampus.edu.lk', external: true },
+      { label: 'Student Portal', href: 'https://lms.aimscampus.online/login/index.php', external: true },
     ],
   },
   {

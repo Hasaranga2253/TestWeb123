@@ -22,7 +22,7 @@ export function Navbar() {
 
   const isProgrammesRoute = pathname.startsWith('/programmes');
 
-  const logoHeight = 'clamp(2.25rem, 4vw, 2.75rem)';
+  const logoHeight = 'clamp(1.9rem, 7vw, 2.75rem)';
   const dividerHeight = 'clamp(2rem, 3.5vw, 2.5rem)';
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export function Navbar() {
                   style={{
                     height: logoHeight,
                     width: 'auto',
-                    maxWidth: 'none',
+                    maxWidth: 'min(30vw, 120px)',
                   }}
                 />
               </Link>
@@ -101,7 +101,7 @@ export function Navbar() {
                   style={{
                     height: logoHeight,
                     width: 'auto',
-                    maxWidth: 'none',
+                    maxWidth: 'min(38vw, 168px)',
                   }}
                 />
               </a>

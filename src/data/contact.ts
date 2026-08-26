@@ -229,8 +229,8 @@ export const usefulContactDetails: UsefulContactDetails = {
     {
       school: 'School of Computing & IT',
       coordinator: 'Programme Coordinator',
-      phone: '077 123 4567',
-      href: 'tel:0771234567',
+      phone: '076 148 7772',
+      href: 'tel:0761487772',
     },
 
     {

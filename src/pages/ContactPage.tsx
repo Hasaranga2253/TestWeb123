@@ -273,18 +273,18 @@ export function ContactPage() {
         <img
           src={contactPageContent.hero.image}
           alt={contactPageContent.hero.imageAlt}
-          className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center"
+          className="absolute inset-0 !h-full w-full object-cover object-[82%_bottom] sm:object-center"
         />
 
 {/* Main navy mask - reduced */}
 <div
-  className="pointer-events-none absolute inset-0 bg-[#041b48]/10 sm:bg-[#041b48]/20"
+  className="pointer-events-none absolute inset-0 bg-[#041b48]/15 sm:bg-[#041b48]/20"
   aria-hidden="true"
 />
 
 {/* Responsive gradient - reduced */}
 <div
-  className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#031437]/55 via-[#06245a]/30 to-[#031437]/65 sm:bg-linear-to-r sm:from-[#031437]/65 sm:via-[#06245a]/35 sm:to-[#06245a]/10"
+  className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#031437]/64 via-[#031437]/52 to-[#031437]/72 sm:bg-linear-to-r sm:from-[#031437]/65 sm:via-[#06245a]/35 sm:to-[#06245a]/10"
   aria-hidden="true"
 />
 

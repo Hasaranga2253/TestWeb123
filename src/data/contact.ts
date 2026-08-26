@@ -6,7 +6,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-import contactHeroImage from '../assets/images/ContactBG.png';
+import contactHeroImage from '../assets/images/contactBG.png';
 /* =========================================================
    TYPES
 ========================================================= */

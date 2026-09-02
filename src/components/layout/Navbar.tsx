@@ -10,8 +10,11 @@ import { programmeNavLinks } from '../../data/programmes';
 
 const navigation = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
+];
+
+const secondaryNavigation = [
   { label: 'Contact', to: '/contact' },
+  { label: 'About', to: '/about' },
 ];
 
 export function Navbar() {
@@ -212,6 +215,23 @@ export function Navbar() {
                     </div>
                   ) : null}
                 </li>
+
+                {secondaryNavigation.map((item) => (
+                  <li key={item.to}>
+                    <NavLink
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `inline-flex items-center gap-1 transition hover:text-aims-blue ${
+                          isActive
+                            ? 'text-aims-blue'
+                            : ''
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </nav>
 
@@ -339,6 +359,26 @@ export function Navbar() {
                     </div>
                   ) : null}
                 </li>
+
+                {secondaryNavigation.map((item) => (
+                  <li key={item.to}>
+                    <NavLink
+                      to={item.to}
+                      onClick={closeMenus}
+                      className={({ isActive }) =>
+                        `flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                          isActive
+                            ? 'bg-white text-aims-blue shadow-sm'
+                            : 'text-slate-600 hover:bg-white hover:text-aims-blue'
+                        }`
+                      }
+                    >
+                      <span>
+                        {item.label}
+                      </span>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </nav>
           ) : null}

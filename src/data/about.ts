@@ -135,14 +135,6 @@ export const aboutStats: AboutStat[] = [
     value: '40',
     label: 'Years of excellence',
   },
-  {
-    value: '2',
-    label: 'Current campus locations',
-  },
-  {
-    value: '7+',
-    label: 'International progression partners',
-  },
 ];
 
 /* =========================================================

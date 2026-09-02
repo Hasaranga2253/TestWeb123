@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 import UEL from '../assets/logos/UELlogo.jpeg';
-import nccLogo from '../assets/logos/NCClogo.webp';
+import cambridgeLogo from '../assets/logos/CambridgeEnglishQualifications.svg';
 
 import Hslider1 from '../assets/images/Hslider1.jpeg';
 import Hslider2 from '../assets/images/Hslider2.jpeg';
@@ -231,9 +231,9 @@ const partners: PartnerLogo[] = [
     alt: 'University of East London logo',
   },
   {
-    name: 'NCC Education',
-    logo: nccLogo,
-    alt: 'NCC Education logo',
+    name: 'Cambridge English Qualifications',
+    logo: cambridgeLogo,
+    alt: 'Cambridge English Qualifications logo',
   },
 ];
 
@@ -389,55 +389,31 @@ function ProgrammeShowcase() {
                 transition={{
                   duration: 0.22,
                 }}
-                className="group relative overflow-hidden rounded-3xl bg-[#04122d] shadow-2xl sm:h-[30rem] sm:rounded-[2rem]"
+                className="group flex min-h-[30rem] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_18px_45px_rgba(7,29,73,0.12)] sm:rounded-[2rem]"
               >
-                <div
-                  className={`absolute inset-0 hidden bg-linear-to-br sm:block ${
-                    index % 3 === 0
-                      ? 'from-blue-950/95 via-blue-900/75 to-sky-700/30'
-                      : index % 3 === 1
-                        ? 'from-blue-950/95 via-indigo-950/70 to-aims-blue/30'
-                        : 'from-blue-950/95 via-slate-900/70 to-aims-navy/25'
-                  }`}
-                  aria-hidden="true"
-                />
-
                 <img
                   src={item.image}
                   alt={`${item.focus} programme`}
                   loading="lazy"
-                  className="h-56 w-full object-cover object-center opacity-100 transition duration-700 group-hover:scale-105 sm:absolute sm:inset-0 sm:h-full sm:opacity-75"
+                  className="h-64 w-full shrink-0 object-cover object-center transition duration-700 group-hover:scale-105 sm:h-72"
                 />
 
-                <div
-                  className="absolute inset-0 hidden bg-linear-to-t from-[#04122d]/92 via-[#04122d]/42 to-transparent sm:block"
-                  aria-hidden="true"
-                />
-
-                <div className="relative z-10 flex flex-col gap-5 p-5 sm:h-full sm:justify-between sm:gap-0 sm:p-7">
-                  <span className="w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur-sm sm:text-[11px] sm:tracking-[0.2em]">
-                    {item.tag}
-                  </span>
-
+                <div className="relative z-10 flex flex-1 flex-col justify-end border-t border-slate-100 bg-white p-5 sm:p-7">
                   <div className="max-w-md">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-aims-gold sm:text-sm sm:tracking-[0.18em]">
-                      {item.focus}
-                    </p>
-
                     {item.title ? (
-                      <h3 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">
+                      <h3 className="text-2xl font-bold leading-tight text-aims-navy sm:text-3xl">
                         {item.title}
                       </h3>
                     ) : null}
 
-                    <p className="mt-3 text-sm leading-6 text-blue-100 sm:mt-4 sm:leading-7">
+                    <p className="text-sm font-medium leading-6 text-slate-700 sm:leading-7">
                       {item.description}
                     </p>
 
                     <Link
                       to={item.to}
                       aria-label={`Explore ${item.focus}`}
-                      className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-aims-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-gold sm:mt-6 sm:w-auto"
+                      className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-aims-navy px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-blue sm:mt-6 sm:w-auto"
                     >
                       Explore programmes
                       <ArrowRight

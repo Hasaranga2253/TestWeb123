@@ -41,12 +41,6 @@ const journeyStages = [
     label: 'Final year, UEL London',
     caption: 'Optional transfer to complete your Honours year with UEL.',
   },
-  {
-    icon: GraduationCap,
-    eyebrow: 'Arrive',
-    label: 'UK-recognised (Hons) degree',
-    caption: 'Graduate with a BSc or BA (Hons) and a clear career route.',
-  },
 ];
 
 // One quiet, oversized icon per programme instead of a photo — keeps the
@@ -79,13 +73,12 @@ export function ProgrammesPage() {
                 Programmes
               </p>
               <h1 className="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-aims-navy sm:text-5xl">
-                From your O/Levels to a UK degree, mapped stage by stage
+                From your O/Levels or A/Levels to a UK degree, mapped stage by stage
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
                 One foundation pathway and three undergraduate programmes, each following the same
                 route: study on campus in Colombo, then finish, if you choose, with a final year at
-                the University of East London. Choose a course below to see its modules, careers and
-                fees.
+                the University of East London. Choose a course below to see its modules and careers.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -163,7 +156,7 @@ export function ProgrammesPage() {
           {/* JOURNEY LINE — the real, shared progression every programme follows */}
           <div className="relative mt-16">
             <div className="absolute left-6 right-6 top-6 hidden h-px bg-gradient-to-r from-transparent via-aims-gold/70 to-transparent md:block" />
-            <ol className="relative grid gap-8 md:grid-cols-5">
+            <ol className="relative grid gap-8 md:grid-cols-4">
               {journeyStages.map((stage, index) => (
                 <motion.li
                   key={stage.label}
@@ -208,8 +201,7 @@ export function ProgrammesPage() {
               Open each programme separately
             </h2>
             <p className="mt-4 text-slate-600">
-              Each card links to a dedicated page with the modules, careers and fees from the
-              brochure.
+              Each card links to a dedicated page with the modules and careers from the brochure.
             </p>
           </header>
 
@@ -263,10 +255,6 @@ export function ProgrammesPage() {
                         <span className="inline-flex items-center gap-1.5">
                           <Layers3 size={14} className="text-aims-blue" aria-hidden="true" />
                           {totalModules} modules · {programme.moduleGroups.length} stages
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <GraduationCap size={14} className="text-aims-blue" aria-hidden="true" />
-                          {programme.careers.length}+ career paths
                         </span>
                       </div>
 

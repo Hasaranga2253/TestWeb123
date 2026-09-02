@@ -24,6 +24,7 @@ import {
   colomboMapEmbedUrl,
   contactMethods,
   contactPageContent,
+  negomboMapEmbedUrl,
   programmeOptions,
   socialLinks,
   usefulContactDetails,
@@ -58,6 +59,11 @@ const sectionReveal = {
     ease: 'easeOut',
   },
 } as const;
+
+const campusMapEmbedUrls: Record<string, string> = {
+  'Colombo 07': colomboMapEmbedUrl,
+  Negombo: negomboMapEmbedUrl,
+};
 
 
 function generalSupportIcon(label: string) {
@@ -821,7 +827,7 @@ export function ContactPage() {
       </AnimatedSection>
 
       {/* =====================================================
-          GOOGLE MAP - COLOMBO 07 ONLY
+          GOOGLE MAPS
       ====================================================== */}
 
       <AnimatedSection className="relative overflow-hidden bg-aims-section py-16 text-white sm:py-20 lg:py-24">
@@ -831,52 +837,64 @@ export function ContactPage() {
         />
 
         <Container className="relative">
-          <div className="grid items-center gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
-            <div>
-              <SectionHeading
-                eyebrow={contactPageContent.map.eyebrow}
-                title={contactPageContent.map.title}
-                description={contactPageContent.map.description}
-                dark
-              />
+          <SectionHeading
+            eyebrow={contactPageContent.map.eyebrow}
+            title={contactPageContent.map.title}
+            description={contactPageContent.map.description}
+            centered
+            dark
+          />
 
-              <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-aims-gold">
-                    <MapPin aria-hidden="true" size={19} />
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {campusLocations.map((campus: CampusLocation, index: number) => {
+              const mapUrl = campusMapEmbedUrls[campus.shortName];
+
+              return (
+                <motion.article
+                  key={`${campus.name}-map`}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-4 shadow-2xl backdrop-blur-sm sm:p-5"
+                >
+                  <div className="mb-5 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-start lg:min-h-[5.75rem]">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-aims-gold">
+                        <MapPin aria-hidden="true" size={19} />
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-white">{campus.shortName}</p>
+                        <p className="mt-1 text-sm leading-6 text-blue-100">{campus.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 sm:justify-end">
+                      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-aims-gold">
+                        <Phone aria-hidden="true" size={18} />
+                      </div>
+
+                      <div className="sm:text-right">
+                        <p className="font-semibold text-white">Admissions hotline</p>
+                        <a href={`tel:${campus.phone.replace(/\D/g, '')}`} className="mt-1 block text-sm text-blue-100">
+                          {campus.phone}
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <p className="font-semibold text-white">Colombo 07</p>
-                    <p className="mt-1 text-sm leading-6 text-blue-100">Colombo 07, Sri Lanka</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-aims-gold">
-                    <Phone aria-hidden="true" size={18} />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-white">Admissions hotline</p>
-                    <a href="tel:01175574500" className="mt-1 block text-sm text-blue-100">
-                      011 755 74500
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-2 shadow-2xl">
-              <iframe
-                src={colomboMapEmbedUrl}
-                title="AIMS Campus Colombo 07 location"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[300px] w-full rounded-[1.5rem] border-0 sm:h-[430px] lg:h-[500px]"
-                allowFullScreen
-              />
-            </div>
+                  <iframe
+                    src={mapUrl}
+                    title={`AIMS Campus ${campus.shortName} location`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="h-[300px] w-full rounded-[1.5rem] border-0 sm:h-[380px]"
+                    allowFullScreen
+                  />
+                </motion.article>
+              );
+            })}
           </div>
         </Container>
       </AnimatedSection>

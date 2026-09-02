@@ -115,7 +115,7 @@ export const programmes: ProgrammeRecord[] = [
     accentClass: 'from-blue-600 via-indigo-600 to-violet-600',
     highlights: ['Software and web development', 'Security and cloud', 'Project-based learning'],
     routeSteps: [
-      'After O/L: Foundation + 3 year degree',
+      'After O/L & A/L: 3 year degree',
       'After A/L: 3 year degree',
       'After HND / Adv.Dip: 1 year top-up degree',
       'Optional final year transfer to UEL, UK',
@@ -184,7 +184,7 @@ export const programmes: ProgrammeRecord[] = [
     accentClass: 'from-emerald-600 via-lime-500 to-amber-400',
     highlights: ['Teaching and assessment', 'Inclusive learning', 'Research and pedagogy'],
     routeSteps: [
-      'After O/L: Foundation + 3 year degree',
+      'After O/L & A/L: 3 year degree',
       'After A/L: 3 year degree',
       'After HND / Adv.Dip: 1 year top-up degree',
       'Optional final year transfer to UEL, UK',
@@ -252,7 +252,7 @@ export const programmes: ProgrammeRecord[] = [
     accentClass: 'from-orange-500 via-amber-500 to-yellow-400',
     highlights: ['Leadership and entrepreneurship', 'Finance and marketing', 'Global business strategy'],
     routeSteps: [
-      'After O/L: Foundation + 3 year degree',
+      'After O/L & A/L: 3 year degree',
       'After A/L: 3 year degree',
       'After HND / Adv.Dip: 1 year top-up degree',
       'Optional final year transfer to UEL, UK',

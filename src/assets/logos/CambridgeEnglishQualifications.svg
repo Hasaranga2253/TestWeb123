@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Cambridge English Qualifications 2025-2026</title>
+  <desc id="desc">Cambridge English Qualifications preparation logo.</desc>
+  <rect width="520" height="300" fill="#ffffff"/>
+  <text x="24" y="30" fill="#183845" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    We prepare for
+  </text>
+  <path d="M0 74H440L520 132L440 190H0Z" fill="#15b9b4"/>
+  <text x="24" y="153" fill="#173845" font-family="Georgia, 'Times New Roman', serif" font-size="82" font-weight="700">
+    Cambridge
+  </text>
+  <text x="24" y="246" fill="#183845" font-family="Arial, Helvetica, sans-serif" font-size="41" font-weight="700">
+    English Qualifications
+  </text>
+  <text x="140" y="292" fill="#183845" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="400">
+    2025-2026
+  </text>
+</svg>

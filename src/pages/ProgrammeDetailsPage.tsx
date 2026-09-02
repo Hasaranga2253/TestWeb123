@@ -15,7 +15,6 @@ import {
   Layers3,
   type LucideIcon,
   TrendingUp,
-  Wallet,
 } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
 import { Link, useParams } from 'react-router-dom';
@@ -208,7 +207,7 @@ export function ProgrammeDetailsPage() {
                 {programme.eyebrow}
               </p>
 
-              <div className="relative z-10 grid divide-y divide-white/10 border-t border-white/10 bg-[#03122a]/70 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              <div className="relative z-10 grid divide-y divide-white/10 border-t border-white/10 bg-[#03122a]/70 backdrop-blur-sm sm:grid-cols-2 sm:divide-x sm:divide-y-0">
                 <div className="flex flex-1 items-center gap-3 p-4">
                   <Compass className="shrink-0 text-aims-gold" size={18} aria-hidden="true" />
                   <div>
@@ -221,13 +220,6 @@ export function ProgrammeDetailsPage() {
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-aims-gold">Modules</p>
                     <p className="mt-0.5 text-sm text-white/90">{programme.moduleGroups.length} study blocks</p>
-                  </div>
-                </div>
-                <div className="flex flex-1 items-center gap-3 p-4">
-                  <Wallet className="shrink-0 text-aims-gold" size={18} aria-hidden="true" />
-                  <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-aims-gold">Fees</p>
-                    <p className="mt-0.5 text-sm text-white/90">{programme.fees[0]?.value ?? 'Available on request'}</p>
                   </div>
                 </div>
               </div>
@@ -338,28 +330,6 @@ export function ProgrammeDetailsPage() {
                     </li>
                   ))}
                 </ol>
-              </div>
-
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                <div className="flex items-center gap-3">
-                  <Wallet className="text-aims-blue" size={18} aria-hidden="true" />
-                  <h3 className="text-xl font-bold text-aims-navy">Fees snapshot</h3>
-                </div>
-                <ul className="mt-5 divide-y divide-dashed divide-slate-200 rounded-2xl bg-white px-4 shadow-sm">
-                  {programme.fees.map((item) => (
-                    <li key={item.label} className="flex items-start justify-between gap-4 py-3.5">
-                      <span className="text-sm font-medium text-slate-600">{item.label}</span>
-                      <span className="shrink-0 text-right">
-                        <span className="block font-mono text-sm font-semibold text-aims-navy">
-                          {item.value}
-                        </span>
-                        {item.note && (
-                          <span className="mt-0.5 block text-xs text-slate-400">{item.note}</span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">

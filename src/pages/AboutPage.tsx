@@ -75,12 +75,11 @@ function FloatingPillars({
   ];
 
   return (
-    <div className="mt-20 flex flex-wrap items-start justify-center gap-x-7 gap-y-16 sm:gap-x-9">
+    <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
       {pillars.map(({ title, description, icon: Icon }, index) => {
         const accent = accents[index % accents.length];
         const duration = 3.4 + index * 0.35;
         const delay = index * 0.25;
-        const isOffset = index % 2 === 1;
 
         return (
           <motion.div
@@ -89,13 +88,12 @@ function FloatingPillars({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-            className="w-full max-w-[15rem]"
-            style={{ marginTop: isOffset ? '2.75rem' : 0 }}
+            className="w-full"
           >
             <motion.article
               animate={{
                 y: [0, -14, 0],
-                rotate: [0, isOffset ? -1.5 : 1.5, 0],
+                rotate: [0, index % 2 === 1 ? -1.5 : 1.5, 0],
               }}
               transition={{
                 duration,

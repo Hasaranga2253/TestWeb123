@@ -94,10 +94,10 @@ export const contactPageContent = {
   map: {
     eyebrow: 'Find us',
 
-    title: 'Colombo 07 Campus',
+    title: 'Campus locations',
 
     description:
-      'Find our Colombo 07 campus using the interactive map and plan your visit to speak with our admissions team.',
+      'Find our Colombo 07 and Negombo locations using the interactive maps and plan your visit to speak with our admissions team.',
   },
 
   social: {
@@ -131,7 +131,7 @@ export const contactPageContent = {
 
 export const contactMethods: ContactMethod[] = [
   {
-    label: 'Hotline',
+    label: 'Fixed Line',
 
     value: '011 755 74500',
 
@@ -211,47 +211,40 @@ export type UsefulContactDetails = {
 export const usefulContactDetails: UsefulContactDetails = {
   generalSupport: [
     {
-      label: 'Hotline',
+      label: 'Fixed Line',
       value: '011 755 74500',
       description: 'General enquiries and assistance',
       href: 'tel:01175574500',
     },
 
     {
-      label: 'WhatsApp',
+      label: 'Hotline',
       value: '077 799 9177',
-      description: 'Quick support through WhatsApp',
-      href: 'https://wa.me/94777999177',
+      description: 'Direct support through our hotline',
+      href: 'tel:0777999177',
     },
   ],
 
   studentSupport: [
     {
       school: 'School of Computing & IT',
-      coordinator: 'Programme Coordinator',
+      coordinator: 'Amalmee',
       phone: '076 148 7772',
       href: 'tel:0761487772',
     },
 
     {
       school: 'School of Business',
-      coordinator: 'Programme Coordinator',
+      coordinator: 'Shirani',
       phone: '076 148 7711',
       href: 'tel:0761487711',
     },
 
     {
       school: 'School of Education',
-      coordinator: 'Programme Coordinator',
+      coordinator: 'Ishini',
       phone: '077 677 1681',
       href: 'tel:0776771681',
-    },
-
-    {
-      school: 'School of PhD',
-      coordinator: 'Programme Coordinator',
-      phone: '077 766 9757',
-      href: 'tel:0774567890',
     },
   ],
 };
@@ -301,21 +294,14 @@ export const campusLocations: CampusLocation[] = [
 ];
 
 /* =========================================================
-   GOOGLE MAP
-   Colombo 07 branch only
+   GOOGLE MAPS
 ========================================================= */
-
-/*
- * ContactPage.tsx uses this directly inside:
- *
- * <iframe src={colomboMapEmbedUrl} ... />
- *
- * So when you later obtain an exact Google Maps Embed URL,
- * you only need to change this single value.
- */
 
 export const colomboMapEmbedUrl =
   'https://www.google.com/maps?q=07%20Rajakeeya%20Mawatha%20Colombo%2007%20Sri%20Lanka&output=embed';
+
+export const negomboMapEmbedUrl =
+  'https://www.google.com/maps?q=349%2F2%20Main%20Street%20Negombo%20Sri%20Lanka&output=embed';
 
 /* =========================================================
    SOCIAL MEDIA LINKS

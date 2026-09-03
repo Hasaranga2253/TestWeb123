@@ -4,6 +4,7 @@ import { AboutPage } from '../pages/AboutPage';
 
 import { ContactPage } from '../pages/ContactPage';
 import HomePage from '../pages/HomePage';
+import { NewsUpdatesPage } from '../pages/NewsUpdatesPage';
 
 import { NotFoundPage } from '../pages/NotFoundPage';
 
@@ -17,6 +18,7 @@ export function AppRoutes() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/news-updates" element={<NewsUpdatesPage />} />
         <Route path="/programmes" element={<ProgrammesPage />} />
         <Route path="/programmes/:programmeSlug" element={<ProgrammeDetailsPage />} />
         

@@ -29,6 +29,7 @@ import AppliedComputing from '../assets/images/AppliedComputing.jpeg';
 import IBM from '../assets/images/IBM.jpeg';
 import foundationProgrammeImage from '../assets/images/FOUNDATION.png';
 import EduStudy from '../assets/images/EduStudy.jpeg';
+import languageProfessionalStudiesImage from '../assets/images/LanguageProfessionalStudies.png';
 import schoolBusinessItImage from '../assets/images/sclB&I.png';
 import schoolEducationPsychologyImage from '../assets/images/sclEdu&Psy.png';
 import schoolLanguageProfessionalImage from '../assets/images/sclLng&Pro.png';
@@ -162,6 +163,15 @@ const featuredProgrammes: FeaturedProgramme[] = [
     focus: 'Business degree',
     image: IBM,
     to: '/programmes/international-business-management',
+  },
+  {
+    tag: 'Professional route',
+    title: '',
+    description:
+      'Develop English language confidence, professional credentials and TESOL-focused teaching expertise.',
+    focus: 'Language & professional studies',
+    image: languageProfessionalStudiesImage,
+    to: '/programmes/language-professional-studies',
   },
 ];
 

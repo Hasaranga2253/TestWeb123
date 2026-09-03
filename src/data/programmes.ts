@@ -2,12 +2,14 @@ import AppliedComputing from '../assets/images/AppC123.jpeg';
 import IBM from '../assets/images/ibm123.jpeg';
 import foundationProgrammeImage from '../assets/images/found.jpeg';
 import EduStudy from '../assets/images/edu.jpeg';
+import languageProfessionalImage from '../assets/images/LanguageProfessionalStudiesPortrait.png';
 
 export type ProgrammeSlug =
   | 'foundation'
   | 'applied-computing'
   | 'education'
-  | 'international-business-management';
+  | 'international-business-management'
+  | 'language-professional-studies';
 
 export type ProgrammeModuleGroup = {
   title: string;
@@ -18,6 +20,14 @@ export type ProgrammeFee = {
   label: string;
   value: string;
   note?: string;
+};
+
+export type ProgrammeSubCategory = {
+  title: string;
+  eyebrow: string;
+  summary: string;
+  highlights: string[];
+  outcome: string;
 };
 
 export type ProgrammeRecord = {
@@ -34,6 +44,7 @@ export type ProgrammeRecord = {
   moduleGroups: ProgrammeModuleGroup[];
   careers: string[];
   fees: ProgrammeFee[];
+  subCategories?: ProgrammeSubCategory[];
 };
 
 const degreeFees: ProgrammeFee[] = [
@@ -48,6 +59,10 @@ const degreeFees: ProgrammeFee[] = [
 const foundationFees: ProgrammeFee[] = [
   { label: 'Registration fee', value: 'LKR 10,000' },
   { label: 'Foundation fee', value: 'LKR 80,000', note: 'Installments 20,000 x 4' },
+];
+
+const pathwayFees: ProgrammeFee[] = [
+  { label: 'Programme fees', value: 'Contact admissions', note: 'Fees vary by selected pathway' },
 ];
 
 export const programmes: ProgrammeRecord[] = [
@@ -307,6 +322,108 @@ export const programmes: ProgrammeRecord[] = [
       'Financial Analyst',
     ],
     fees: degreeFees,
+  },
+  {
+    slug: 'language-professional-studies',
+    navLabel: 'Language & Professional Studies',
+    title: 'School of Language & Professional Studies',
+    eyebrow: 'Professional route',
+    summary:
+      'A professional study route for students and working learners who want stronger language ability, recognised credentials and practical workplace-ready skills.',
+    focus: 'Language & professional credentials',
+    image: languageProfessionalImage,
+    accentClass: 'from-cyan-600 via-blue-600 to-emerald-500',
+    highlights: [
+      'Cambridge English preparation',
+      'CIPM professional development',
+      'TESOL-focused education pathway',
+    ],
+    routeSteps: [
+      'Choose Cambridge Department, CIPM or MA in Education with TESOL Emphasis',
+      'Build practical communication, professional or TESOL teaching capability',
+      'Progress towards academic, teaching or workplace opportunities',
+    ],
+    subCategories: [
+      {
+        title: 'Cambridge Department',
+        eyebrow: 'English language pathway',
+        summary:
+          'Structured English language learning and assessment preparation for students who want stronger academic, professional and everyday communication.',
+        highlights: [
+          'Speaking and listening confidence',
+          'Reading and writing development',
+          'Exam-focused preparation',
+        ],
+        outcome: 'For learners preparing for recognised English language progress.',
+      },
+      {
+        title: 'CIPM',
+        eyebrow: 'Professional studies pathway',
+        summary:
+          'A practical route for learners interested in people management, workplace communication and professional HR development.',
+        highlights: [
+          'Human resource fundamentals',
+          'People and workplace practice',
+          'Professional progression support',
+        ],
+        outcome: 'For learners building confidence for HR and management-related roles.',
+      },
+      {
+        title: 'MA in Education with TESOL Emphasis',
+        eyebrow: 'Postgraduate education pathway',
+        summary:
+          'A postgraduate-focused education route for teachers and education professionals who want to deepen TESOL knowledge and language pedagogy.',
+        highlights: [
+          'TESOL theory and practice',
+          'Language teaching methods',
+          'Education-focused research skills',
+        ],
+        outcome: 'For educators aiming to strengthen English language teaching expertise.',
+      },
+    ],
+    moduleGroups: [
+      {
+        title: 'Cambridge Department',
+        items: [
+          'English language skills development',
+          'Speaking, listening, reading and writing practice',
+          'Grammar, vocabulary and communication confidence',
+          'Cambridge English assessment preparation',
+          'Academic and professional communication support',
+        ],
+      },
+      {
+        title: 'CIPM',
+        items: [
+          'Professional workplace communication',
+          'Human resource management foundations',
+          'People management and administration practice',
+          'Leadership and organisational behaviour basics',
+          'Professional examination preparation support',
+        ],
+      },
+      {
+        title: 'MA in Education with TESOL Emphasis',
+        items: [
+          'TESOL principles and language pedagogy',
+          'Teaching English to speakers of other languages',
+          'Curriculum, assessment and classroom practice',
+          'Language, culture and learner diversity',
+          'Education research and academic writing',
+        ],
+      },
+    ],
+    careers: [
+      'English Language Teacher',
+      'TESOL Practitioner',
+      'Academic Coordinator',
+      'Language Programme Coordinator',
+      'Training & Development Executive',
+      'Human Resource Assistant',
+      'People Operations Coordinator',
+      'Professional Development Officer',
+    ],
+    fees: pathwayFees,
   },
 ];
 

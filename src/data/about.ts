@@ -43,7 +43,7 @@ export const aboutPageContent: AboutPageContent = {
     eyebrow: 'About AIMS Campus',
     title: 'Transforming lives through education',
     description:
-      'AIMS Campus is an established higher education institution with 39 years of academic excellence, providing recognised local and international education pathways.',
+      'AIMS Campus is an established higher education institution with 40 years of academic excellence, providing recognised local and international education pathways.',
     image: aboutFallbackImage,
     imageAlt: '',
   },

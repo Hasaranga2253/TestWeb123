@@ -13,6 +13,7 @@ const navigation = [
 ];
 
 const secondaryNavigation = [
+  { label: 'News & Updates', to: '/news-updates' },
   { label: 'Contact', to: '/contact' },
   { label: 'About', to: '/about' },
 ];

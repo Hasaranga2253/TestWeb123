@@ -12,6 +12,7 @@ import {
   Compass,
   Globe,
   GraduationCap,
+  Languages,
   Layers3,
   type LucideIcon,
   TrendingUp,
@@ -38,6 +39,7 @@ const programmeIcons: Record<string, LucideIcon> = {
   'applied-computing': Code2,
   education: GraduationCap,
   'international-business-management': Briefcase,
+  'language-professional-studies': Languages,
 };
 
 // Two small satellite icons per programme, used to build the hero motif
@@ -47,6 +49,7 @@ const decorativeIcons: Record<string, [LucideIcon, LucideIcon]> = {
   'applied-computing': [Code2, Cloud],
   education: [BookOpen, ClipboardList],
   'international-business-management': [TrendingUp, Globe],
+  'language-professional-studies': [Languages, Globe],
 };
 
 export function ProgrammeDetailsPage() {
@@ -228,6 +231,74 @@ export function ProgrammeDetailsPage() {
         </div>
         </Container>
       </section>
+
+      {programme.subCategories ? (
+        <section className="bg-slate-50 py-14 sm:py-20">
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-aims-blue">
+                  School pathways
+                </p>
+                <h2 className="mt-3 text-3xl font-bold leading-tight text-aims-navy sm:text-4xl">
+                  Three specialist categories
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  Select the area that matches your goal: English language
+                  development, professional HR progression or TESOL-focused
+                  postgraduate education.
+                </p>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-3">
+                {programme.subCategories.map((category, index) => (
+                  <motion.article
+                    key={category.title}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: '-80px' }}
+                    custom={index}
+                    variants={fadeUp}
+                    whileHover={{ y: -6 }}
+                    className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_14px_42px_rgba(7,29,73,0.07)]"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-aims-sky text-aims-blue">
+                      <ProgrammeIcon size={20} aria-hidden="true" />
+                    </span>
+
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-aims-blue">
+                      {category.eyebrow}
+                    </p>
+                    <h3 className="mt-2 text-xl font-bold leading-tight text-aims-navy">
+                      {category.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-7 text-slate-600">
+                      {category.summary}
+                    </p>
+
+                    <ul className="mt-5 space-y-2">
+                      {category.highlights.map((highlight) => (
+                        <li key={highlight} className="flex items-start gap-2 text-sm text-slate-600">
+                          <CheckCircle
+                            className="mt-0.5 shrink-0 text-aims-blue"
+                            size={15}
+                            aria-hidden="true"
+                          />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <p className="mt-5 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-medium leading-6 text-slate-600">
+                      {category.outcome}
+                    </p>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       <section className="py-14 sm:py-20" id="modules">
         <Container>

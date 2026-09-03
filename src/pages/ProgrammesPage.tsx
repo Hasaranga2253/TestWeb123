@@ -5,6 +5,7 @@ import {
   Code2,
   Compass,
   GraduationCap,
+  Languages,
   Layers3,
   type LucideIcon,
   MapPin,
@@ -20,26 +21,26 @@ const journeyStages = [
   {
     icon: MapPin,
     eyebrow: 'Start here',
-    label: 'O/L or A/L results',
-    caption: 'Direct entry to a degree after A/L, or via Foundation after O/L.',
+    label: 'Your current goal',
+    caption: 'Start from O/Ls, A/Ls, prior study, work experience or a professional learning need.',
   },
   {
     icon: Compass,
     eyebrow: 'Stage 1',
-    label: 'Foundation (if needed)',
-    caption: 'Study skills, maths and subject grounding before Year 1.',
+    label: 'Choose the right route',
+    caption: 'Select Foundation, an undergraduate degree or a language and professional pathway.',
   },
   {
     icon: Layers3,
     eyebrow: 'Stage 2',
-    label: 'Level 4 & 5 diplomas',
-    caption: 'Two years on campus in Colombo, taught to NCC UK / AIMS standard.',
+    label: 'Structured campus learning',
+    caption: 'Build practical skills through guided modules, teaching support and clear progression.',
   },
   {
     icon: PlaneTakeoff,
     eyebrow: 'Stage 3',
-    label: 'Final year, UEL London',
-    caption: 'Optional transfer to complete your Honours year with UEL.',
+    label: 'Progress with confidence',
+    caption: 'Move toward degree completion, professional credentials or stronger teaching and language skills.',
   },
 ];
 
@@ -50,6 +51,7 @@ const programmeIcons: Record<string, LucideIcon> = {
   'applied-computing': Code2,
   education: GraduationCap,
   'international-business-management': Briefcase,
+  'language-professional-studies': Languages,
 };
 
 const fadeUp: Variants = {
@@ -73,12 +75,11 @@ export function ProgrammesPage() {
                 Programmes
               </p>
               <h1 className="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-aims-navy sm:text-5xl">
-                From your O/Levels or A/Levels to a UK degree, mapped stage by stage
+                Choose a study route that matches your next step
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                One foundation pathway and three undergraduate programmes, each following the same
-                route: study on campus in Colombo, then finish, if you choose, with a final year at
-                the University of East London. Choose a course below to see its modules and careers.
+                Explore foundation, undergraduate and professional study routes at AIMS Campus.
+                Choose a course below to see its pathways, modules and career direction.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -211,6 +212,10 @@ export function ProgrammesPage() {
                 (sum, group) => sum + group.items.length,
                 0,
               );
+              const imageFitClass =
+                programme.slug === 'language-professional-studies'
+                  ? 'origin-top scale-[1.16] object-top'
+                  : 'object-top';
 
               return (
                 <motion.article
@@ -228,13 +233,9 @@ export function ProgrammesPage() {
                       <img
                         src={programme.image}
                         alt={programme.title}
-                        className="h-60 w-full object-cover object-top sm:h-72 lg:absolute lg:inset-0 lg:h-full"
+                        className={`h-60 w-full object-cover sm:h-72 lg:absolute lg:inset-0 lg:h-full ${imageFitClass}`}
                         loading="lazy"
                       />
-                      <div
-                        className={`absolute inset-0 bg-linear-to-br ${programme.accentClass} opacity-35`}
-                      />
-                      <div className="absolute inset-0 bg-linear-to-t from-[#04122d]/85 via-transparent to-transparent" />
                       <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
                         {programme.eyebrow}
                       </div>

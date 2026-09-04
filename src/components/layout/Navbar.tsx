@@ -68,6 +68,7 @@ export function Navbar() {
                   alt="AIMS Campus logo"
                   width={120}
                   height={44}
+                  decoding="async"
                   className="block shrink-0 object-contain"
                   style={{
                     height: logoHeight,
@@ -101,6 +102,7 @@ export function Navbar() {
                   alt="University of East London logo"
                   width={168}
                   height={44}
+                  decoding="async"
                   className="block shrink-0 object-contain"
                   style={{
                     height: logoHeight,

@@ -6,7 +6,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 
-import aboutFallbackImage from '../assets/images/d9137cae-bb2f-4b7a-b543-5f9b612e3ac9.png';
+import aboutFallbackImage from '../assets/optimized/intake-announcement.jpg';
 import chairmanImage from '../assets/images/chairman.jpeg';
 import drKithsiriImage from '../assets/images/Dr.Kithsiri.png';
 import profUdithImage from '../assets/images/Prof.Udith.png';

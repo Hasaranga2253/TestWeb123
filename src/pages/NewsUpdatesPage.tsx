@@ -127,6 +127,8 @@ export function NewsUpdatesPage() {
           src={featuredUpdate.images[0]?.src}
           alt=""
           aria-hidden="true"
+          decoding="async"
+          fetchPriority="high"
           className="absolute inset-0 !h-full w-full object-cover opacity-28"
         />
         <div
@@ -202,6 +204,7 @@ export function NewsUpdatesPage() {
                   <img
                     src={update.images[0]?.src}
                     alt={update.images[0]?.alt ?? update.title}
+                    decoding="async"
                     className="!h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                   <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/78 via-black/36 to-transparent p-4">
@@ -252,6 +255,7 @@ export function NewsUpdatesPage() {
                     src={update.images[0]?.src}
                     alt={update.images[0]?.alt ?? update.title}
                     loading="lazy"
+                    decoding="async"
                     className="!h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                   <span className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-aims-blue shadow-sm">
@@ -346,6 +350,7 @@ export function NewsUpdatesPage() {
                         src={image.src}
                         alt={image.alt}
                         loading="lazy"
+                        decoding="async"
                         className={`w-full object-cover transition duration-700 group-hover:scale-105 ${
                           index === 0 ? '!h-full min-h-[18rem]' : 'aspect-square !h-auto'
                         }`}
@@ -433,6 +438,7 @@ export function NewsUpdatesPage() {
               <img
                 src={currentLightboxImage.src}
                 alt={currentLightboxImage.alt}
+                decoding="async"
                 className="mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-2xl"
               />
               <figcaption className="mx-auto mt-5 max-w-3xl text-center">

@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { motion } from 'motion/react';
 import { ArrowRight, Award, CheckCircle2, Quote } from 'lucide-react';
@@ -34,6 +34,81 @@ function AnimatedSection({
     <motion.section {...sectionReveal} className={className}>
       {children}
     </motion.section>
+  );
+}
+
+function LazyDecorativeVideo({
+  src,
+  eager = false,
+  className,
+}: {
+  src: string;
+  eager?: boolean;
+  className: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(eager);
+  const [allowMotion, setAllowMotion] = useState(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncMotionPreference = () => setAllowMotion(!mediaQuery.matches);
+
+    syncMotionPreference();
+    mediaQuery.addEventListener('change', syncMotionPreference);
+
+    return () => {
+      mediaQuery.removeEventListener('change', syncMotionPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (eager || shouldLoad) {
+      return;
+    }
+
+    const target = containerRef.current;
+
+    if (!target || !('IntersectionObserver' in window)) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '360px 0px' },
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [eager, shouldLoad]);
+
+  return (
+    <div ref={containerRef} className={className}>
+      {allowMotion && shouldLoad ? (
+        <video
+          aria-hidden="true"
+          autoPlay
+          loop
+          muted
+          playsInline
+          disablePictureInPicture
+          controls={false}
+          preload={eager ? 'metadata' : 'none'}
+          className="h-full w-full object-cover"
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ) : null}
+    </div>
   );
 }
 
@@ -144,18 +219,11 @@ export function AboutPage() {
   return (
     <div className="bg-white text-slate-800">
       <section className="relative isolate flex min-h-[560px] items-center overflow-hidden text-white sm:min-h-[70vh]">
-        <video
-    aria-hidden="true"
-    autoPlay
-    loop
-    muted
-    playsInline
-    disablePictureInPicture
-    controls={false}
-    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-  >
-          <source src={aboutHeroVideo} type="video/mp4" />
-        </video>
+        <LazyDecorativeVideo
+          src={aboutHeroVideo}
+          eager
+          className="pointer-events-none absolute inset-0 h-full w-full bg-aims-section"
+        />
 
   {/* LIGHT BLUE / NAVY MASK */}
   <div
@@ -316,9 +384,9 @@ export function AboutPage() {
                   src={aboutPageContent.chairmanMessage.image}
                   alt={aboutPageContent.chairmanMessage.imageAlt}
                   loading="lazy"
-                  className="h-[26rem] w-auto max-w-full object-contain object-bottom drop-shadow-2xl sm:h-[40rem] lg:-mr-14 lg:h-[46rem] lg:max-w-none xl:-mr-20 xl:h-[50rem]"
+                  decoding="async"
+                  className="h-[28rem] w-auto max-w-full object-contain object-bottom drop-shadow-2xl sm:h-[40rem] lg:-mr-10 lg:h-[46rem] lg:max-w-none xl:-mr-14 xl:h-[50rem]"
                 />
-
               </div>
             </div>
           </div>
@@ -358,6 +426,7 @@ export function AboutPage() {
                     src={member.image}
                     alt={member.imageAlt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full scale-[1.7] object-cover object-top transition duration-300 group-hover:scale-[1.8]"
                   />
                   <div
@@ -414,6 +483,7 @@ export function AboutPage() {
                     src={member.image}
                     alt={member.imageAlt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full scale-[1.7] object-cover object-top transition duration-300 group-hover:scale-[1.8]"
                   />
                   <div
@@ -475,18 +545,10 @@ export function AboutPage() {
 
   {/* VIDEO - BELOW THE TEXT */}
   <div className="relative h-[320px] overflow-hidden sm:h-[520px] lg:h-[620px]">
-    <video
-      aria-hidden="true"
-      autoPlay
-      loop
-      muted
-      playsInline
-      disablePictureInPicture
-      controls={false}
-      className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-    >
-      <source src={historyVideo} type="video/mp4" />
-    </video>
+    <LazyDecorativeVideo
+      src={historyVideo}
+      className="pointer-events-none absolute inset-0 h-full w-full bg-aims-section"
+    />
   </div>
 </section>
 

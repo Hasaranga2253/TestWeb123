@@ -249,6 +249,7 @@ function FieldShell({
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loadedMaps, setLoadedMaps] = useState<Record<string, boolean>>({});
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -279,6 +280,8 @@ export function ContactPage() {
         <img
           src={contactPageContent.hero.image}
           alt={contactPageContent.hero.imageAlt}
+          decoding="async"
+          fetchPriority="high"
           className="absolute inset-0 !h-full w-full object-cover object-[82%_bottom] sm:object-center"
         />
 
@@ -339,7 +342,7 @@ export function ContactPage() {
               <a
                 href="https://wa.me/94777999177"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/35 bg-white/10 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/15"
               >
                 <MessageCircle aria-hidden="true" size={18} />
@@ -407,7 +410,7 @@ export function ContactPage() {
                 key={contact.label}
                 href={contact.href}
                 target={contact.href?.startsWith('http') ? '_blank' : undefined}
-                rel={contact.href?.startsWith('http') ? 'noreferrer' : undefined}
+                rel={contact.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
@@ -519,7 +522,7 @@ export function ContactPage() {
                 <a
                   href="https://wa.me/94777999177"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-aims-gold px-6 py-3 font-semibold text-aims-dark transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Chat on WhatsApp
@@ -846,6 +849,10 @@ export function ContactPage() {
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {campusLocations.map((campus: CampusLocation, index: number) => {
               const mapUrl = campusMapEmbedUrls[campus.shortName];
+              const isMapLoaded = Boolean(loadedMaps[campus.shortName]);
+              const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                campus.location,
+              )}`;
 
               return (
                 <motion.article
@@ -882,14 +889,48 @@ export function ContactPage() {
                     </div>
                   </div>
 
-                  <iframe
-                    src={mapUrl}
-                    title={`AIMS Campus ${campus.shortName} location`}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="h-[300px] w-full rounded-[1.5rem] border-0 sm:h-[380px]"
-                    allowFullScreen
-                  />
+                  <div className="relative h-[300px] overflow-hidden rounded-[1.5rem] bg-[#06142f] sm:h-[380px]">
+                    {isMapLoaded ? (
+                      <iframe
+                        src={mapUrl}
+                        title={`AIMS Campus ${campus.shortName} location`}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="absolute inset-0 h-full w-full border-0"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <div className="flex h-full flex-col items-center justify-center px-6 text-center">
+                        <MapPin aria-hidden="true" size={36} className="text-aims-gold" />
+                        <p className="mt-4 text-lg font-semibold text-white">{campus.shortName}</p>
+                        <p className="mt-2 max-w-md text-sm leading-6 text-blue-100">
+                          Load the Google map only when you need it.
+                        </p>
+                        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setLoadedMaps((current) => ({
+                                ...current,
+                                [campus.shortName]: true,
+                              }))
+                            }
+                            className="inline-flex min-h-11 items-center justify-center rounded-full bg-aims-gold px-5 py-2.5 text-sm font-semibold text-aims-dark transition hover:-translate-y-0.5"
+                          >
+                            Load map
+                          </button>
+                          <a
+                            href={mapsSearchUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+                          >
+                            Open in Google Maps
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </motion.article>
               );
             })}
@@ -916,7 +957,7 @@ export function ContactPage() {
                 key={social.label}
                 href={social.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 whileHover={{ y: -4, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="group inline-flex min-w-[140px] items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 font-semibold text-aims-navy shadow-sm transition hover:border-aims-blue/25 hover:shadow-lg sm:min-w-[160px] sm:px-6"

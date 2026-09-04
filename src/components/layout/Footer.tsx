@@ -140,6 +140,7 @@ export function Footer() {
                 <img
                   src={CmpsLogo}
                   alt="AIMS Campus logo"
+                  decoding="async"
                   className="h-full max-h-10 w-auto object-contain"
                 />
                 </FooterLogoPlate>
@@ -150,7 +151,7 @@ export function Footer() {
               <a
                 href="https://www.uel.ac.uk/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="Visit University of East London website"
                 className="group block"
               >
@@ -158,6 +159,7 @@ export function Footer() {
                 <img
                   src={UelLogo}
                   alt="University of East London logo"
+                  decoding="async"
                   className="h-full max-h-10 w-auto object-contain"
                 />
                 </FooterLogoPlate>
@@ -178,7 +180,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-aims-dark/55 shadow-sm ring-1 ring-white/5 transition duration-300 hover:-translate-y-0.5 hover:border-aims-gold/40 hover:bg-aims-blue/35"
                 >
@@ -204,7 +206,7 @@ export function Footer() {
                       <a
                         href={link.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="group inline-flex items-center gap-1.5 text-blue-100/80 transition-colors hover:text-aims-gold"
                       >
                         {link.label}
@@ -257,7 +259,7 @@ export function Footer() {
                       <a
                         href={item.href}
                         target={item.href.startsWith('http') ? '_blank' : undefined}
-                        rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="group flex items-start gap-3 transition-colors hover:text-white"
                       >
                         {content}

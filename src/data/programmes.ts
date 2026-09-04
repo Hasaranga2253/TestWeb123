@@ -2,7 +2,7 @@ import AppliedComputing from '../assets/images/AppC123.jpeg';
 import IBM from '../assets/images/ibm123.jpeg';
 import foundationProgrammeImage from '../assets/images/found.jpeg';
 import EduStudy from '../assets/images/edu.jpeg';
-import languageProfessionalImage from '../assets/images/LanguageProfessionalStudiesPortrait.png';
+import languageProfessionalImage from '../assets/optimized/language-professional-studies-portrait.jpg';
 
 export type ProgrammeSlug =
   | 'foundation'

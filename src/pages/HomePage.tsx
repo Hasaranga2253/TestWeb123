@@ -24,18 +24,18 @@ import Hslider1 from '../assets/images/Hslider1.jpeg';
 import Hslider2 from '../assets/images/Hslider2.jpeg';
 import Hslider3 from '../assets/images/Hslider3.jpeg';
 
-import WhyCaims from '../assets/images/WhyCaims.png';
+import WhyCaims from '../assets/optimized/why-caims.jpg';
 import AppliedComputing from '../assets/images/AppliedComputing.jpeg';
 import IBM from '../assets/images/IBM.jpeg';
-import foundationProgrammeImage from '../assets/images/FOUNDATION.png';
+import foundationProgrammeImage from '../assets/optimized/foundation-programme.jpg';
 import EduStudy from '../assets/images/EduStudy.jpeg';
-import languageProfessionalStudiesImage from '../assets/images/LanguageProfessionalStudies.png';
-import schoolBusinessItImage from '../assets/images/sclB&I.png';
-import schoolEducationPsychologyImage from '../assets/images/sclEdu&Psy.png';
-import schoolLanguageProfessionalImage from '../assets/images/sclLng&Pro.png';
-import schoolDoctoralStudiesImage from '../assets/images/schlDocS.png';
+import languageProfessionalStudiesImage from '../assets/optimized/language-professional-studies.jpg';
+import schoolBusinessItImage from '../assets/optimized/school-business-it.jpg';
+import schoolEducationPsychologyImage from '../assets/optimized/school-education-psychology.jpg';
+import schoolLanguageProfessionalImage from '../assets/optimized/school-language-professional.jpg';
+import schoolDoctoralStudiesImage from '../assets/optimized/school-doctoral-studies.jpg';
 
-import intakePopupImage from '../assets/images/d9137cae-bb2f-4b7a-b543-5f9b612e3ac9.png';
+import intakePopupImage from '../assets/optimized/intake-announcement.jpg';
 
 /* =========================================================
    HERO SLIDER
@@ -405,6 +405,7 @@ function ProgrammeShowcase() {
                   src={item.image}
                   alt={`${item.focus} programme`}
                   loading="lazy"
+                  decoding="async"
                   className="h-64 w-full shrink-0 object-cover object-center transition duration-700 group-hover:scale-105 sm:h-72"
                 />
 
@@ -857,6 +858,7 @@ function IntakePopup() {
             <img
               src={intakePopupImage}
               alt="New intake now open at AIMS Campus"
+              decoding="async"
               className="w-full object-cover"
             />
 
@@ -965,6 +967,7 @@ export default function HomePage() {
             className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl lg:aspect-auto"
             alt="AIMS Campus learning environment"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </Section>
@@ -1029,6 +1032,7 @@ export default function HomePage() {
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full rounded-full object-cover"
                   />
                 ) : (
@@ -1103,6 +1107,7 @@ export default function HomePage() {
                   src={partner.logo}
                   alt={partner.alt}
                   loading="lazy"
+                  decoding="async"
                   className="relative z-10 max-h-28 max-w-[135px] object-contain transition duration-300 group-hover:scale-105"
                 />
               </div>

@@ -235,6 +235,7 @@ export function ProgrammesPage() {
                         alt={programme.title}
                         className={`h-60 w-full object-cover sm:h-72 lg:absolute lg:inset-0 lg:h-full ${imageFitClass}`}
                         loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
                         {programme.eyebrow}

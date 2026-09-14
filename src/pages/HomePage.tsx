@@ -35,7 +35,7 @@ import schoolEducationPsychologyImage from '../assets/optimized/school-education
 import schoolLanguageProfessionalImage from '../assets/optimized/school-language-professional.jpg';
 import schoolDoctoralStudiesImage from '../assets/optimized/school-doctoral-studies.jpg';
 
-import intakePopupImage from '../assets/optimized/intake-announcement.jpg';
+import intakePopupImage from '../assets/images/popupimg.png';
 
 /* =========================================================
    HERO SLIDER
@@ -859,7 +859,7 @@ function IntakePopup() {
               src={intakePopupImage}
               alt="New intake now open at AIMS Campus"
               decoding="async"
-              className="w-full object-cover"
+              className="h-auto w-full"
             />
 
             <div className="p-6 text-center">

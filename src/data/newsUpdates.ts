@@ -1,10 +1,4 @@
-export type NewsUpdateId =
-  | 'uel'
-  | 'orientation'
-  | 'graduation'
-  | 'phd-evening'
-  | 'edex-edu'
-  | 'aims-new-year';
+export type NewsUpdateId = string;
 
 export type GalleryImage = {
   src: string;

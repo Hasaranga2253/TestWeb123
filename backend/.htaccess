@@ -1,0 +1,7 @@
+Options -Indexes
+
+<FilesMatch "^(\.env|.*\.(json|php~|bak|log))$">
+  Require all denied
+</FilesMatch>
+
+RedirectMatch 403 ^/backend/(data|sessions)(/.*)?$

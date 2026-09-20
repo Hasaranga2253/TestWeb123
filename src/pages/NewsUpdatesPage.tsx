@@ -13,7 +13,12 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Container } from '../components/common/Container';
-import { newsUpdates, type GalleryImage } from '../data/newsUpdates';
+import { backendUrl } from '../utils/api';
+import {
+  newsUpdates,
+  type GalleryImage,
+  type NewsUpdate,
+} from '../data/newsUpdates';
 
 const sectionReveal = {
   initial: { opacity: 0, y: 30 },
@@ -45,10 +50,86 @@ function AnimatedSection({
 
 export function NewsUpdatesPage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [updates, setUpdates] =
+    useState<NewsUpdate[]>(newsUpdates);
 
-  const featuredUpdate = newsUpdates.find((update) => update.id === 'graduation') ?? newsUpdates[0];
-  const heroUpdates = newsUpdates.filter((update) => update.images.length > 0).slice(0, 4);
-  const visibleImages: LightboxImage[] = newsUpdates.flatMap((update) =>
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadAdminNewsImages() {
+      try {
+        const response = await fetch(
+          backendUrl('/backend/api/news-images.php'),
+          {
+            cache: 'no-store',
+            signal: controller.signal,
+          },
+        );
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as {
+          albums?: Record<string, GalleryImage[]>;
+          customAlbums?: Record<
+            string,
+            Omit<NewsUpdate, 'images'>
+          >;
+        };
+
+        if (!data.albums && !data.customAlbums) {
+          return;
+        }
+
+        const customUpdates = Object.values(
+          data.customAlbums ?? {},
+        )
+          .map((album) => ({
+            ...album,
+            images: data.albums?.[album.id] ?? [],
+          }))
+          .filter(
+            (album): album is NewsUpdate =>
+              Boolean(album.id) &&
+              Boolean(album.title) &&
+              album.images.length > 0,
+          );
+
+        setUpdates(
+          [
+            ...customUpdates,
+            ...newsUpdates.map((update) => {
+              const adminImages =
+                data.albums?.[update.id] ?? [];
+
+              if (adminImages.length === 0) {
+                return update;
+              }
+
+              return {
+                ...update,
+                images: [
+                  ...adminImages,
+                  ...update.images,
+                ],
+              };
+            }),
+          ],
+        );
+      } catch {
+        setUpdates(newsUpdates);
+      }
+    }
+
+    void loadAdminNewsImages();
+
+    return () => controller.abort();
+  }, []);
+
+  const featuredUpdate = updates.find((update) => update.id === 'graduation') ?? updates[0];
+  const heroUpdates = updates.filter((update) => update.images.length > 0).slice(0, 4);
+  const visibleImages: LightboxImage[] = updates.flatMap((update) =>
     update.images.map((image) => ({
       ...image,
       albumTitle: update.title,
@@ -240,7 +321,7 @@ export function NewsUpdatesPage() {
           </div>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {newsUpdates.map((update, index) => (
+            {updates.map((update, index) => (
               <motion.article
                 key={update.id}
                 initial={{ opacity: 0, y: 24 }}
@@ -316,7 +397,7 @@ export function NewsUpdatesPage() {
           </div>
 
           <div className="mt-12 space-y-14">
-            {newsUpdates.map((update) => (
+            {updates.map((update) => (
               <section key={update.id} id={update.id} className="scroll-mt-36">
                 <div className="mb-6 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                   <div className="max-w-3xl">

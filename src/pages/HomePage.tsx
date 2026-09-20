@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { backendUrl } from '../utils/api';
 
 import {
   ArrowRight,
@@ -36,6 +37,103 @@ import schoolLanguageProfessionalImage from '../assets/optimized/school-language
 import schoolDoctoralStudiesImage from '../assets/optimized/school-doctoral-studies.jpg';
 
 import intakePopupImage from '../assets/images/popupimg.png';
+
+type IntakePopupConfig = {
+  enabled: boolean;
+  delayMs: number;
+  frequency: 'session' | 'always';
+  eyebrow: string;
+  title: string;
+  message: string;
+  primaryLabel: string;
+  primaryUrl: string;
+  secondaryLabel: string;
+  imageUrl: string;
+  imageAlt: string;
+};
+
+const defaultIntakePopupConfig: IntakePopupConfig = {
+  enabled: true,
+  delayMs: 600,
+  frequency: 'session',
+  eyebrow: 'Admissions',
+  title: 'New intake now open!',
+  message:
+    'Limited seats available for this intake. Apply now to secure your place.',
+  primaryLabel: 'Apply now',
+  primaryUrl: '/contact',
+  secondaryLabel: 'Maybe later',
+  imageUrl: intakePopupImage,
+  imageAlt: 'New intake now open at AIMS Campus',
+};
+
+function cleanPopupConfig(
+  value: unknown,
+): IntakePopupConfig {
+  if (!value || typeof value !== 'object') {
+    return defaultIntakePopupConfig;
+  }
+
+  const data = value as Partial<IntakePopupConfig>;
+
+  return {
+    enabled:
+      typeof data.enabled === 'boolean'
+        ? data.enabled
+        : defaultIntakePopupConfig.enabled,
+    delayMs:
+      typeof data.delayMs === 'number'
+        ? Math.max(
+            0,
+            Math.min(10000, data.delayMs),
+          )
+        : defaultIntakePopupConfig.delayMs,
+    frequency:
+      data.frequency === 'always'
+        ? 'always'
+        : defaultIntakePopupConfig.frequency,
+    eyebrow:
+      typeof data.eyebrow === 'string' &&
+      data.eyebrow.trim()
+        ? data.eyebrow
+        : defaultIntakePopupConfig.eyebrow,
+    title:
+      typeof data.title === 'string' &&
+      data.title.trim()
+        ? data.title
+        : defaultIntakePopupConfig.title,
+    message:
+      typeof data.message === 'string' &&
+      data.message.trim()
+        ? data.message
+        : defaultIntakePopupConfig.message,
+    primaryLabel:
+      typeof data.primaryLabel === 'string' &&
+      data.primaryLabel.trim()
+        ? data.primaryLabel
+        : defaultIntakePopupConfig.primaryLabel,
+    primaryUrl:
+      typeof data.primaryUrl === 'string' &&
+      data.primaryUrl.trim()
+        ? data.primaryUrl
+        : defaultIntakePopupConfig.primaryUrl,
+    secondaryLabel:
+      typeof data.secondaryLabel === 'string' &&
+      data.secondaryLabel.trim()
+        ? data.secondaryLabel
+        : defaultIntakePopupConfig.secondaryLabel,
+    imageUrl:
+      typeof data.imageUrl === 'string' &&
+      data.imageUrl.trim()
+        ? data.imageUrl
+        : defaultIntakePopupConfig.imageUrl,
+    imageAlt:
+      typeof data.imageAlt === 'string' &&
+      data.imageAlt.trim()
+        ? data.imageAlt
+        : defaultIntakePopupConfig.imageAlt,
+  };
+}
 
 /* =========================================================
    HERO SLIDER
@@ -466,15 +564,69 @@ function ProgrammeShowcase() {
 function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [heroSlides, setHeroSlides] =
+    useState<HeroSlide[]>(slides);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadSliderImages() {
+      try {
+        const response = await fetch(
+          backendUrl('/backend/api/slider.php'),
+          {
+            cache: 'no-store',
+            signal: controller.signal,
+          },
+        );
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as {
+          slides?: Record<
+            string,
+            { imageUrl?: string }
+          >;
+        };
+
+        if (!data.slides) {
+          return;
+        }
+
+        setHeroSlides(
+          slides.map((slide, slideIndex) => {
+            const adminSlide =
+              data.slides?.[String(slideIndex)];
+
+            return adminSlide?.imageUrl
+              ? {
+                  ...slide,
+                  image: adminSlide.imageUrl,
+                }
+              : slide;
+          }),
+        );
+      } catch {
+        setHeroSlides(slides);
+      }
+    }
+
+    void loadSliderImages();
+
+    return () => controller.abort();
+  }, []);
 
   const goTo = useCallback(
     (nextIndex: number) => {
       setDirection(nextIndex > index ? 1 : -1);
       setIndex(
-        (nextIndex + slides.length) % slides.length,
+        (nextIndex + heroSlides.length) %
+          heroSlides.length,
       );
     },
-    [index],
+    [heroSlides.length, index],
   );
 
   const next = useCallback(() => {
@@ -491,16 +643,16 @@ function HeroSlider() {
 
       setIndex(
         (previousIndex) =>
-          (previousIndex + 1) % slides.length,
+          (previousIndex + 1) % heroSlides.length,
       );
     }, 6000);
 
     return () => {
       window.clearInterval(timer);
     };
-  }, []);
+  }, [heroSlides.length]);
 
-  const slide = slides[index];
+  const slide = heroSlides[index] ?? heroSlides[0];
 
   const detailItems =
     slide.details ?? heroDetailPlaceholders;
@@ -714,7 +866,7 @@ function HeroSlider() {
       </button>
 
       <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {slides.map((_, slideIndex) => (
+        {heroSlides.map((_, slideIndex) => (
           <button
             key={slideIndex}
             type="button"
@@ -738,27 +890,98 @@ function HeroSlider() {
 
 function IntakePopup() {
   const [open, setOpen] = useState(false);
+  const [config, setConfig] = useState(
+    defaultIntakePopupConfig,
+  );
 
   useEffect(() => {
-    const alreadySeen = sessionStorage.getItem(
-      'aims-intake-popup-seen',
-    );
+    const controller = new AbortController();
 
-    if (alreadySeen) {
-      return;
+    async function loadPopupConfig() {
+      try {
+        const response = await fetch(
+          backendUrl('/backend/api/popup.php'),
+          {
+            cache: 'no-store',
+            signal: controller.signal,
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            'Popup configuration unavailable.',
+          );
+        }
+
+        const data = (await response.json()) as unknown;
+        const nextConfig = cleanPopupConfig(data);
+
+        setConfig(nextConfig);
+
+        if (!nextConfig.enabled) {
+          return;
+        }
+
+        const alreadySeen =
+          nextConfig.frequency === 'session' &&
+          sessionStorage.getItem(
+            'aims-intake-popup-seen',
+          );
+
+        if (alreadySeen) {
+          return;
+        }
+
+        const timer = window.setTimeout(() => {
+          setOpen(true);
+
+          if (nextConfig.frequency === 'session') {
+            sessionStorage.setItem(
+              'aims-intake-popup-seen',
+              'true',
+            );
+          }
+        }, nextConfig.delayMs);
+
+        controller.signal.addEventListener(
+          'abort',
+          () => window.clearTimeout(timer),
+          { once: true },
+        );
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        const alreadySeen = sessionStorage.getItem(
+          'aims-intake-popup-seen',
+        );
+
+        if (alreadySeen) {
+          return;
+        }
+
+        const timer = window.setTimeout(() => {
+          setOpen(true);
+
+          sessionStorage.setItem(
+            'aims-intake-popup-seen',
+            'true',
+          );
+        }, defaultIntakePopupConfig.delayMs);
+
+        controller.signal.addEventListener(
+          'abort',
+          () => window.clearTimeout(timer),
+          { once: true },
+        );
+      }
     }
 
-    const timer = window.setTimeout(() => {
-      setOpen(true);
-
-      sessionStorage.setItem(
-        'aims-intake-popup-seen',
-        'true',
-      );
-    }, 600);
+    void loadPopupConfig();
 
     return () => {
-      window.clearTimeout(timer);
+      controller.abort();
     };
   }, []);
 
@@ -856,47 +1079,62 @@ function IntakePopup() {
             </button>
 
             <img
-              src={intakePopupImage}
-              alt="New intake now open at AIMS Campus"
+              src={config.imageUrl}
+              alt={config.imageAlt}
               decoding="async"
               className="h-auto w-full"
             />
 
             <div className="p-6 text-center">
               <p className="font-semibold uppercase tracking-[0.2em] text-aims-blue">
-                Admissions
+                {config.eyebrow}
               </p>
 
               <h3 className="mt-2 text-2xl font-bold text-aims-navy">
-                New intake now open!
+                {config.title}
               </h3>
 
               <p className="mt-2 text-slate-500">
-                Limited seats available for this
-                intake. Apply now to secure your
-                place.
+                {config.message}
               </p>
 
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                <Link
-                  to="/contact"
-                  onClick={close}
-                  className="inline-flex items-center gap-2 rounded-xl bg-yellow-400 px-6 py-3 font-semibold text-blue-950 transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  Apply now
+                {config.primaryUrl.startsWith('/') ? (
+                  <Link
+                    to={config.primaryUrl}
+                    onClick={close}
+                    className="inline-flex items-center gap-2 rounded-xl bg-yellow-400 px-6 py-3 font-semibold text-blue-950 transition hover:-translate-y-0.5 hover:shadow-lg"
+                  >
+                    {config.primaryLabel}
 
-                  <ArrowRight
-                    size={16}
-                    aria-hidden="true"
-                  />
-                </Link>
+                    <ArrowRight
+                      size={16}
+                      aria-hidden="true"
+                    />
+                  </Link>
+                ) : (
+                  <a
+                    href={config.primaryUrl}
+                    onClick={close}
+                    className="inline-flex items-center gap-2 rounded-xl bg-yellow-400 px-6 py-3 font-semibold text-blue-950 transition hover:-translate-y-0.5 hover:shadow-lg"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {config.primaryLabel}
+
+                    <ArrowRight
+                      size={16}
+                      aria-hidden="true"
+                    />
+                  </a>
+                )}
 
                 <button
                   type="button"
                   onClick={close}
                   className="rounded-xl border border-slate-200 px-6 py-3 font-semibold text-slate-500 transition hover:bg-slate-50"
                 >
-                  Maybe later
+                  {config.secondaryLabel}
                 </button>
               </div>
             </div>

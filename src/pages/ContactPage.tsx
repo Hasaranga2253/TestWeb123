@@ -17,6 +17,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Container } from '../components/common/Container';
+import { backendUrl } from '../utils/api';
 
 import {
   campusLocations,
@@ -249,25 +250,52 @@ function FieldShell({
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] =
+    useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
   const [loadedMaps, setLoadedMaps] = useState<Record<string, boolean>>({});
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError(null);
+    setIsSubmitting(true);
 
-    /*
-     * FRONTEND-ONLY FOR NOW
-     * -----------------------------------------------------
-     * No information is currently sent to a backend.
-     *
-     * Later this is where we can connect:
-     * - Your own API
-     * - Node / Express backend
-     * - Email service
-     * - Database
-     * - CRM
-     */
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    setSubmitted(true);
+    try {
+      const response = await fetch(
+        backendUrl('/backend/api/enquiry.php'),
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
+
+      const result = (await response.json()) as {
+        ok?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !result.ok) {
+        throw new Error(
+          result.message ??
+            'Could not save your enquiry. Please try again.',
+        );
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Could not save your enquiry. Please try again.',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -556,8 +584,7 @@ export function ContactPage() {
                   <h3 className="mt-7 text-3xl font-bold text-aims-navy">Enquiry captured</h3>
 
                   <p className="mt-4 max-w-md text-base leading-7 text-slate-600">
-                    The frontend form is working correctly. No message has been sent yet because
-                    backend submission will be connected later.
+                    Thank you. Your enquiry has been saved and our admissions team can review it from the admin dashboard.
                   </p>
 
                   <button
@@ -570,6 +597,12 @@ export function ContactPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitError ? (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                      {submitError}
+                    </div>
+                  ) : null}
+
                   <div className="grid gap-6 sm:grid-cols-2">
                     {/* Name */}
                     <FieldShell label="Full name" htmlFor="fullName">
@@ -694,9 +727,10 @@ export function ContactPage() {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-aims-navy px-7 py-3.5 font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-aims-blue hover:shadow-xl sm:w-auto"
                   >
-                    Send enquiry
+                    {isSubmitting ? 'Sending...' : 'Send enquiry'}
                     <Send aria-hidden="true" size={18} />
                   </button>
                 </form>

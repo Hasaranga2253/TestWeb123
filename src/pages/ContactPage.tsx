@@ -35,6 +35,9 @@ import {
   type SocialLink,
 } from '../data/contact';
 
+const enquirySubmitErrorMessage =
+  'We could not submit your enquiry right now. Please call 011 755 4500 or email info@aimscampus.lk, or try again later.';
+
 /* =========================================================
    ANIMATION
 ========================================================= */
@@ -273,6 +276,11 @@ export function ContactPage() {
         },
       );
 
+      const contentType = response.headers.get('content-type') ?? '';
+      if (!contentType.includes('application/json')) {
+        throw new Error(enquirySubmitErrorMessage);
+      }
+
       const result = (await response.json()) as {
         ok?: boolean;
         message?: string;
@@ -281,7 +289,7 @@ export function ContactPage() {
       if (!response.ok || !result.ok) {
         throw new Error(
           result.message ??
-            'Could not save your enquiry. Please try again.',
+            enquirySubmitErrorMessage,
         );
       }
 
@@ -291,7 +299,7 @@ export function ContactPage() {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : 'Could not save your enquiry. Please try again.',
+          : enquirySubmitErrorMessage,
       );
     } finally {
       setIsSubmitting(false);

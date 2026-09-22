@@ -133,12 +133,12 @@ export const contactMethods: ContactMethod[] = [
   {
     label: 'Fixed Line',
 
-    value: '011 755 74500',
+    value: '011 757 4500',
 
     description:
       'Speak directly with our admissions team for programme information, application guidance and general enquiries.',
 
-    href: 'tel:01175574500',
+    href: 'tel:0117574500',
 
     icon: Phone,
   },

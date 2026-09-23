@@ -212,9 +212,9 @@ export const usefulContactDetails: UsefulContactDetails = {
   generalSupport: [
     {
       label: 'Fixed Line',
-      value: '011 755 74500',
+      value: '011 757 4500',
       description: 'General enquiries and assistance',
-      href: 'tel:01175574500',
+      href: 'tel:0117574500',
     },
 
     {

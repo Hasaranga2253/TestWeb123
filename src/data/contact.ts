@@ -264,7 +264,7 @@ export const campusLocations: CampusLocation[] = [
     description:
       'Our Colombo 07 campus provides convenient access to admissions guidance, academic information and student support in the heart of Colombo.',
 
-    phone: '011 755 74500',
+    phone: '011 757 4500',
 
     email: 'info@aimscollege.lk',
 
@@ -285,7 +285,7 @@ export const campusLocations: CampusLocation[] = [
     description:
       'Our Negombo location provides students with access to programme information, admissions assistance and academic guidance closer to home.',
 
-    phone: '011 755 74500',
+    phone: '011 757 4500',
 
     email: 'info@aimscollege.lk',
 

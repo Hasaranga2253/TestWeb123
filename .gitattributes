@@ -1,0 +1,3 @@
+
+# Keep the About-page videos as regular Git files: Hostinger's Node deployment
+# does not fetch Git LFS objects during its build.

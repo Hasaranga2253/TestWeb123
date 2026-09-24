@@ -8,7 +8,6 @@ import { backendUrl } from '../utils/api';
 
 import {
   ArrowRight,
-  Award,
   Brain,
   CheckCircle,
   ChevronLeft,
@@ -34,7 +33,6 @@ import languageProfessionalStudiesImage from '../assets/optimized/language-profe
 import schoolBusinessItImage from '../assets/optimized/school-business-it.jpg';
 import schoolEducationPsychologyImage from '../assets/optimized/school-education-psychology.jpg';
 import schoolLanguageProfessionalImage from '../assets/optimized/school-language-professional.jpg';
-import schoolDoctoralStudiesImage from '../assets/optimized/school-doctoral-studies.jpg';
 
 import intakePopupImage from '../assets/images/popupimg.png';
 
@@ -309,16 +307,6 @@ const schools = [
     accent: 'text-emerald-600',
     to: '/Contact',
     image: schoolLanguageProfessionalImage,
-  },
-  {
-    title: 'School of Doctoral Studies',
-    description:
-      'Advanced, research-led doctoral degrees for academics and senior professionals.',
-    icon: Award,
-    glow: 'from-amber-400/25 to-yellow-500/10',
-    accent: 'text-amber-600',
-    to: '/Contact',
-    image: schoolDoctoralStudiesImage,
   },
 ];
 

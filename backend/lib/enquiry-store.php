@@ -37,6 +37,13 @@ function aims_database(): PDO
         )',
     );
 
+    $columns = $pdo->query('PRAGMA table_info(enquiries)')->fetchAll();
+    $columnNames = array_column($columns, 'name');
+
+    if (!in_array('admin_note', $columnNames, true)) {
+        $pdo->exec('ALTER TABLE enquiries ADD COLUMN admin_note TEXT NOT NULL DEFAULT ""');
+    }
+
     return $pdo;
 }
 
@@ -109,4 +116,45 @@ function aims_list_enquiries(int $limit = 100): array
     $statement->execute();
 
     return $statement->fetchAll();
+}
+
+function aims_enquiry_statuses(): array
+{
+    return [
+        'new' => 'New',
+        'contacted' => 'Contacted',
+        'closed' => 'Closed',
+    ];
+}
+
+function aims_update_enquiry(int $id, string $status, string $adminNote): bool
+{
+    if ($id < 1 || !array_key_exists($status, aims_enquiry_statuses())) {
+        throw new RuntimeException('Invalid enquiry update.');
+    }
+
+    $statement = aims_database()->prepare(
+        'UPDATE enquiries
+         SET status = :status, admin_note = :admin_note
+         WHERE id = :id',
+    );
+    $statement->execute([
+        ':status' => $status,
+        ':admin_note' => aims_clean_text($adminNote, 1200),
+        ':id' => $id,
+    ]);
+
+    return $statement->rowCount() === 1;
+}
+
+function aims_delete_enquiry(int $id): bool
+{
+    if ($id < 1) {
+        throw new RuntimeException('Invalid enquiry deletion.');
+    }
+
+    $statement = aims_database()->prepare('DELETE FROM enquiries WHERE id = :id');
+    $statement->execute([':id' => $id]);
+
+    return $statement->rowCount() === 1;
 }

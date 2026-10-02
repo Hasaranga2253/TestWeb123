@@ -354,7 +354,12 @@ app.patch('/backend/admin/api/enquiries/:id', requireAdmin, requireSameOrigin, a
   if (!['new', 'contacted', 'closed'].includes(status)) return apiError(response, 422, 'Invalid enquiry status.');
   try {
     await ensureSchema();
-    await pool.execute('UPDATE enquiries SET status = ?, admin_note = ? WHERE id = ?', [status, cleanText(request.body?.adminNote, 1200), request.params.id]);
+    const hasAdminNote = Object.prototype.hasOwnProperty.call(request.body ?? {}, 'adminNote');
+    if (hasAdminNote) {
+      await pool.execute('UPDATE enquiries SET status = ?, admin_note = ? WHERE id = ?', [status, cleanText(request.body.adminNote, 1200), request.params.id]);
+    } else {
+      await pool.execute('UPDATE enquiries SET status = ? WHERE id = ?', [status, request.params.id]);
+    }
     response.json({ ok: true });
   } catch (error) {
     console.error('Could not update enquiry', error);

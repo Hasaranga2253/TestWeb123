@@ -11,6 +11,7 @@ const directory = path.dirname(fileURLToPath(import.meta.url));
 const port = Number.parseInt(process.env.PORT ?? '3000', 10);
 const app = express();
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 app.use((request, response, next) => {
   const origin = request.get('origin');
   const allowedOrigins = new Set(['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174']);
@@ -228,6 +229,15 @@ function hasAdminSession(request) {
   return signature.length === expected.length && crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
 }
 
+function adminCookieOptions(request) {
+  return {
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: request.secure || request.get('x-forwarded-proto') === 'https',
+    path: '/backend/admin',
+  };
+}
+
 function requireAdmin(request, response, next) {
   if (!hasAdminSession(request)) return apiError(response, 401, 'Admin login required.');
   return next();
@@ -321,11 +331,11 @@ app.post('/backend/admin/api/login', requireSameOrigin, (request, response) => {
   if (password.length < 12 || supplied.length !== password.length || !crypto.timingSafeEqual(Buffer.from(supplied), Buffer.from(password))) {
     return apiError(response, 401, 'Invalid username or password.');
   }
-  response.cookie('aims_admin', adminSessionToken(), { httpOnly: true, sameSite: 'strict', secure: true, maxAge: 8 * 60 * 60 * 1000, path: '/backend/admin' });
+  response.cookie('aims_admin', adminSessionToken(), { ...adminCookieOptions(request), maxAge: 8 * 60 * 60 * 1000 });
   return response.json({ ok: true });
 });
-app.post('/backend/admin/api/logout', requireSameOrigin, (_request, response) => {
-  response.clearCookie('aims_admin', { httpOnly: true, sameSite: 'strict', secure: true, path: '/backend/admin' });
+app.post('/backend/admin/api/logout', requireSameOrigin, (request, response) => {
+  response.clearCookie('aims_admin', adminCookieOptions(request));
   response.json({ ok: true });
 });
 

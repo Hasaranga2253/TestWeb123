@@ -392,11 +392,6 @@ export const programmeOptions: SelectOption[] = [
   },
 
   {
-    label: 'Doctoral programmes',
-    value: 'doctoral',
-  },
-
-  {
     label: 'Professional programmes',
     value: 'professional',
   },

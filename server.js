@@ -172,7 +172,7 @@ async function createEnquiry(request, response) {
   const subject = cleanText(input.subject, 140);
   const message = cleanText(input.message, 1200);
   const campuses = new Set(['colombo-07', 'negombo', 'not-sure']);
-  const programmes = new Set(['foundation', 'diploma', 'bachelors', 'masters', 'doctoral', 'professional', 'english', 'not-sure']);
+  const programmes = new Set(['foundation', 'diploma', 'bachelors', 'masters', 'professional', 'english', 'not-sure']);
 
   if (!fullName || !phone || !email || !subject || !message) {
     return apiError(response, 422, 'Please complete all required fields.');

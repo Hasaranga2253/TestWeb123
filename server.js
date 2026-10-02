@@ -12,9 +12,19 @@ const port = Number.parseInt(process.env.PORT ?? '3000', 10);
 const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
+const configuredOrigins = String(process.env.ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 app.use((request, response, next) => {
   const origin = request.get('origin');
-  const allowedOrigins = new Set(['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174']);
+  const allowedOrigins = new Set([
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    ...configuredOrigins,
+  ]);
 
   if (origin && allowedOrigins.has(origin)) {
     response.set({
@@ -131,32 +141,52 @@ function cleanText(value, maxLength) {
   return String(value ?? '').replace(/<[^>]*>/g, '').trim().replace(/\s+/g, ' ').slice(0, maxLength);
 }
 
+function publicAssetUrl(request, value) {
+  const source = cleanText(value, 300);
+  if (!source.startsWith('/backend/media/')) return source;
+  return `${request.protocol}://${request.get('host')}${source}`;
+}
+
 function isEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-async function sendPopup(_request, response) {
+async function sendPopup(request, response) {
   try {
     const popup = await readSetting('popup', defaultPopup);
-    response.set('Cache-Control', 'no-store, max-age=0').json({ ...defaultPopup, ...popup });
+    response.set('Cache-Control', 'no-store, max-age=0').json({
+      ...defaultPopup,
+      ...popup,
+      imageUrl: publicAssetUrl(request, popup.imageUrl),
+    });
   } catch (error) {
     console.error('Could not read popup settings', error);
     apiError(response, 503, 'The website service is temporarily unavailable.');
   }
 }
 
-async function sendSlider(_request, response) {
+async function sendSlider(request, response) {
   try {
-    response.set('Cache-Control', 'no-store, max-age=0').json(await readSetting('slider', { slides: [] }));
+    const data = await readSetting('slider', { slides: [] });
+    const slides = Object.fromEntries(Object.entries(data.slides ?? {}).map(([index, slide]) => [
+      index,
+      { ...slide, imageUrl: publicAssetUrl(request, slide?.imageUrl) },
+    ]));
+    response.set('Cache-Control', 'no-store, max-age=0').json({ ...data, slides });
   } catch (error) {
     console.error('Could not read slider settings', error);
     apiError(response, 503, 'The website service is temporarily unavailable.');
   }
 }
 
-async function sendNewsImages(_request, response) {
+async function sendNewsImages(request, response) {
   try {
-    response.set('Cache-Control', 'no-store, max-age=0').json(await readSetting('news-images', { albums: {}, customAlbums: {} }));
+    const data = await readSetting('news-images', { albums: {}, customAlbums: {} });
+    const albums = Object.fromEntries(Object.entries(data.albums ?? {}).map(([album, images]) => [
+      album,
+      Array.isArray(images) ? images.map((image) => ({ ...image, src: publicAssetUrl(request, image?.src) })) : [],
+    ]));
+    response.set('Cache-Control', 'no-store, max-age=0').json({ ...data, albums });
   } catch (error) {
     console.error('Could not read news images', error);
     apiError(response, 503, 'The website service is temporarily unavailable.');

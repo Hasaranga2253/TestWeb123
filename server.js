@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import 'dotenv/config';
 import express from 'express';
 import mysql from 'mysql2/promise';
 import multer from 'multer';

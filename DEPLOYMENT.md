@@ -6,6 +6,10 @@ This application has a React/Vite frontend and an Express API in `server.js`.
 
 `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, and `ADMIN_PASSWORD` must be configured in the Hostinger dashboard. Do not commit their values.
 
+## Local development
+
+Copy `.env.example` to `.env`, replace the two password placeholders, then run `npm run dev`. This starts the Vite frontend on port 5173 and the Node API on port 3000 together.
+
 ## Deployment settings
 
 Configure the Hostinger Node application as **Other** (or **Express**) with:

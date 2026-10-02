@@ -266,13 +266,17 @@ export function ContactPage() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const enquiry = Object.fromEntries(formData);
 
     try {
       const response = await fetch(
         backendUrl('/backend/api/enquiry.php'),
         {
           method: 'POST',
-          body: formData,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(enquiry),
         },
       );
 

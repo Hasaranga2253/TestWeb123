@@ -11,6 +11,22 @@ const directory = path.dirname(fileURLToPath(import.meta.url));
 const port = Number.parseInt(process.env.PORT ?? '3000', 10);
 const app = express();
 app.disable('x-powered-by');
+app.use((request, response, next) => {
+  const origin = request.get('origin');
+  const allowedOrigins = new Set(['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174']);
+
+  if (origin && allowedOrigins.has(origin)) {
+    response.set({
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      Vary: 'Origin',
+    });
+  }
+
+  if (request.method === 'OPTIONS') return response.sendStatus(204);
+  return next();
+});
 app.use(express.json({ limit: '256kb' }));
 const upload = multer({
   storage: multer.memoryStorage(),

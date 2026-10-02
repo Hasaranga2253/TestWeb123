@@ -439,6 +439,13 @@ app.post('/backend/admin/api/news/images', requireAdmin, requireSameOrigin, uplo
   }
 });
 
+// Retain the original admin URLs and styling while the Node service provides the data.
+app.get('/backend/admin/styles.css', (_request, response) => {
+  response.sendFile(path.join(directory, 'backend', 'admin', 'styles.css'));
+});
+app.get('/backend/admin/admin-app.js', (_request, response) => {
+  response.sendFile(path.join(directory, 'admin-app.js'));
+});
 app.get(['/backend/admin', '/backend/admin/', '/backend/admin/login.php', '/backend/admin/index.php', '/backend/admin/dashboard.php', '/backend/admin/enquiries.php', '/backend/admin/slider.php', '/backend/admin/news.php'], (_request, response) => {
   response.sendFile(path.join(directory, 'admin.html'));
 });

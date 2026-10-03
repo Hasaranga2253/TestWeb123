@@ -44,8 +44,18 @@ const upload = multer({
   limits: { fileSize: 2 * 1024 * 1024, files: 1 },
 });
 
+function resolveDatabaseHost() {
+  const configuredHost = process.env.DB_HOST;
+
+  if (process.platform !== 'win32' && configuredHost?.endsWith('.hstgr.io')) {
+    return '127.0.0.1';
+  }
+
+  return configuredHost;
+}
+
 const databaseConfig = {
-  host: process.env.DB_HOST,
+  host: resolveDatabaseHost(),
   port: Number.parseInt(process.env.DB_PORT ?? '3306', 10),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,

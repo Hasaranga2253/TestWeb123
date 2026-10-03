@@ -12,6 +12,7 @@ import {
   aboutStats,
   boardGovernanceMembers,
   excellencePillars,
+  policyItems,
   senateMembers,
 } from '../data/about';
 import type { SectionIntro } from '../types/about';
@@ -212,6 +213,53 @@ function FloatingPillars({
         );
       })}
     </div>
+  );
+}
+
+function PolicySection() {
+  const content = aboutPageContent.policies ?? aboutPageContent.pillars;
+
+  return (
+    <AnimatedSection className="bg-white py-18 sm:py-20 lg:py-24">
+      <Container>
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="font-semibold uppercase tracking-[0.24em] text-aims-gold">
+            {content.eyebrow}
+          </p>
+
+          <h2 className="mx-auto mt-5 max-w-4xl text-3xl font-bold leading-[1.08] text-aims-navy sm:text-5xl lg:text-6xl">
+            {content.title}
+          </h2>
+
+          {content.description ? (
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg lg:text-xl">
+              {content.description}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          {policyItems.map(({ title, description }, index) => (
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: index * 0.06, ease: 'easeOut' }}
+              className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgba(7,29,73,0.07)] transition hover:-translate-y-1 hover:border-aims-blue/25 hover:shadow-[0_24px_55px_rgba(7,29,73,0.12)]"
+            >
+
+              <h3 className="text-lg font-bold leading-snug text-aims-navy">
+                {title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                {description}
+              </p>
+            </motion.article>
+          ))}
+        </div>
+      </Container>
+    </AnimatedSection>
   );
 }
 
@@ -513,6 +561,8 @@ export function AboutPage() {
           <FloatingPillars pillars={excellencePillars} />
         </Container>
       </AnimatedSection>
+
+      <PolicySection />
 
 <section className="bg-white">
   {/* HISTORY TEXT - ABOVE THE VIDEO */}

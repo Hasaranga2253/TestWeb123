@@ -31,6 +31,7 @@ import type {
   BoardGovernanceMember,
   ExcellencePillar,
   HistoryMilestone,
+  PolicyItem,
   SenateMember,
 } from '../types/about';
 
@@ -87,6 +88,13 @@ export const aboutPageContent: AboutPageContent = {
     title: 'Five pillars of excellence',
     description:
       'These principles guide teaching quality, academic development, partnerships, student experience and institutional leadership.',
+  },
+
+  policies: {
+    eyebrow: 'Our policies',
+    title: 'Clear standards for a supportive academic environment',
+    description:
+      'AIMS Campus maintains academic and administrative policies that support fairness, transparency, student welfare and continuous quality improvement.',
   },
 
   history: {
@@ -253,6 +261,42 @@ export const excellencePillars: ExcellencePillar[] = [
     description:
       'Institutional development is supported by responsible governance, academic oversight and professional leadership.',
     icon: ShieldCheck,
+  },
+];
+
+/* =========================================================
+   POLICIES
+========================================================= */
+
+export const policyItems: PolicyItem[] = [
+  {
+    title: 'Quality assurance',
+    description:
+      'Academic delivery, assessment and programme review are guided by quality standards and ongoing improvement practices.',
+  },
+
+  {
+    title: 'Admissions and progression',
+    description:
+      'Student entry, recognition of prior learning and progression decisions are handled through clear and consistent procedures.',
+  },
+
+  {
+    title: 'Student support',
+    description:
+      'Learners are supported through academic guidance, wellbeing awareness and responsive communication throughout their study journey.',
+  },
+
+  {
+    title: 'Academic integrity',
+    description:
+      'Students and staff are expected to uphold honest academic practice, responsible research conduct and ethical learning standards.',
+  },
+
+  {
+    title: 'Complaints and appeals',
+    description:
+      'Concerns, appeals and feedback are managed through fair review processes that respect confidentiality and due process.',
   },
 ];
 

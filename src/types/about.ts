@@ -53,6 +53,11 @@ export interface ExcellencePillar {
   icon: LucideIcon;
 }
 
+export interface PolicyItem {
+  title: string;
+  description: string;
+}
+
 export interface HistoryMilestone {
   year: string;
   title: string;
@@ -129,6 +134,7 @@ export interface AboutPageContent {
   introduction?: AboutIntroductionContent;
   chairmanMessage: ChairmanMessageContent;
   pillars: SectionIntro;
+  policies?: SectionIntro;
   history: HistorySectionContent;
   partners?: SectionIntro;
   pathways?: SectionIntro;

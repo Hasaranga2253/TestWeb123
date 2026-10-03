@@ -21,3 +21,9 @@ Configure the Hostinger Node application as **Other** (or **Express**) with:
 - Node.js: 22.x
 
 The application creates the required MySQL tables on startup. Admin pages remain available at `/backend/admin/`, and legacy links such as `/backend/admin/enquiries.php` redirect to the same Node-powered interface.
+
+## Persistent data safety
+
+Contact enquiries, enquiry statuses, admin settings, popup images, slider images, and news gallery uploads are stored in MySQL tables. Redeploying the Node.js application replaces application files only; it does not delete those database records.
+
+Do not move new admin uploads back into `public_html/backend/uploads` or another deploy-managed folder unless that folder is separately backed up and excluded from deployment overwrites.
